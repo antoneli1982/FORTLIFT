@@ -16,7 +16,7 @@
 @media(pointer:coarse),(max-width:760px){.touch-steer{display:block}.touch-drive{display:flex}.touch-hydraulic{left:54%;right:auto;top:auto;bottom:48px;transform:translateX(-50%);width:auto;background:none;border:0;padding:0}.touch-hydraulic>span{font-size:10px;letter-spacing:0;text-shadow:0 1px 4px #000}.touch-hydraulic>div{margin:6px 0;gap:6px}.touch-hydraulic button{width:47px;height:58px;flex-direction:column;gap:0;font-size:22px}.touch-hydraulic button small{font-size:9px}.touch-hydraulic button kbd,.touch-hydraulic .hydraulic-instruction{display:none}.touch-hydraulic #hydraulic-status{font-size:9px;max-width:100px}}
 @media(pointer:coarse) and (orientation:landscape) and (max-height:600px){.touch-drive{display:grid}.touch-hydraulic{left:50%;bottom:111px!important}.touch-hydraulic button{width:72px;height:38px;flex-direction:row;gap:5px}.touch-hydraulic>span{display:none!important}.touch-hydraulic>div{margin:0}.touch-hydraulic button small{font-size:10px}}
 @media(pointer:fine) and (min-width:761px) and (max-height:650px){.touch-hydraulic{top:auto;bottom:57px}.operation-prompt{left:24px;transform:none;min-width:0;width:calc(100% - 305px)}}
-.speed-control{margin:-2px 0 17px}.speed-caption{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;letter-spacing:.04em;margin-bottom:7px;color:#bac6cf}.speed-caption strong{color:#f6b282;font-size:12px;font-weight:500;letter-spacing:0}.speed-options{display:flex;gap:6px}.speed-options button{display:flex;flex:1;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:41px;border:1px solid #586875;border-radius:4px;background:#293741;font-size:14px}.speed-options button small{font-size:10px;white-space:nowrap}.speed-options button.active{background:#d75d20;border-color:#ffaa79;color:#fff}.touch-hydraulic{top:425px}
+.touch-hydraulic .shift-row button{height:46px;font-size:17px}@media(pointer:coarse),(max-width:760px){.touch-hydraulic .shift-row{margin:5px 0}.touch-hydraulic .shift-row button{height:42px;width:47px;font-size:15px}.touch-hydraulic .shift-row button small{font-size:8px}}@media(max-width:430px){.touch-hydraulic .shift-row button{width:37px}}@media(pointer:coarse) and (orientation:landscape) and (max-height:600px){.touch-hydraulic .shift-row button{height:32px;width:72px}}.speed-control{margin:-2px 0 17px}.speed-caption{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;letter-spacing:.04em;margin-bottom:7px;color:#bac6cf}.speed-caption strong{color:#f6b282;font-size:12px;font-weight:500;letter-spacing:0}.speed-options{display:flex;gap:6px}.speed-options button{display:flex;flex:1;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:41px;border:1px solid #586875;border-radius:4px;background:#293741;font-size:14px}.speed-options button small{font-size:10px;white-space:nowrap}.speed-options button.active{background:#d75d20;border-color:#ffaa79;color:#fff}.touch-hydraulic{top:425px}
 @media(pointer:fine) and (min-width:761px) and (max-height:650px){.touch-hydraulic{left:25px;right:auto;top:170px;bottom:auto}}
 @media(pointer:coarse),(max-width:760px){.speed-control{margin:0 0 10px}.speed-caption{font-size:9px;margin-bottom:5px}.speed-caption strong{font-size:10px}.speed-options{gap:4px}.speed-options button{min-height:36px;font-size:12px}.speed-options button small{font-size:9px}.touch-hydraulic{top:auto}}
 @media(pointer:coarse) and (orientation:landscape) and (max-height:600px){.speed-control{position:fixed;top:62px;left:240px;right:201px;margin:0;padding:6px 9px;background:#192027ed;border:1px solid #58636d70;border-radius:6px}.speed-caption{display:none}.speed-options button{min-height:31px;flex-direction:row;gap:5px}}
@@ -113,6 +113,67 @@
   #loading{inset:46px 0 0}
 }
 
+/* ================= visibilidade dos paineis (tecla V) ================= */
+.icon-button svg{width:19px;height:19px}
+#mini-hud{display:none;position:absolute;right:30px;top:96px;gap:15px;align-items:center;padding:7px 13px;background:#192027c4;border:1px solid #58636d55;border-radius:7px;font-size:12px;color:#dbe3e8;pointer-events:none;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+#mini-hud b{font-weight:600;color:#fff}
+@media(pointer:coarse),(max-width:760px){#mini-hud{right:15px;top:70px;font-size:11px;gap:10px;padding:5px 9px}}
+body[data-hud="compact"] .hydraulic-instruction,
+body[data-hud="compact"] .telemetry-foot,
+body[data-hud="compact"] #sound-state,
+body[data-hud="compact"] .warehouse-info,
+body[data-hud="compact"] .timer-goal,
+body[data-hud="compact"] .timer-elapsed,
+body[data-hud="compact"] .camera-toolbar>span:last-child,
+body[data-hud="compact"] #prompt-detail,
+body[data-hud="compact"] footer>div{display:none!important}
+body[data-hud="compact"] .telemetry{width:188px;padding:12px 13px 0}
+body[data-hud="compact"] .telemetry-row{margin-bottom:9px;font-size:12px}
+body[data-hud="compact"] .speed-line strong{font-size:37px}
+body[data-hud="compact"] .gauge{margin:11px 0}
+body[data-hud="compact"] .operation-tools{width:202px}
+body[data-hud="compact"] .timer-panel{padding:10px}
+body[data-hud="compact"] .timer-readout strong{font-size:31px}
+body[data-hud="compact"] .touch-hydraulic{width:188px;padding:10px}
+body[data-hud="compact"] .touch-hydraulic button{height:44px;font-size:18px}
+body[data-hud="compact"] .touch-hydraulic .shift-row button{height:35px;font-size:14px}
+body[data-hud="compact"] .telemetry,
+body[data-hud="compact"] .timer-panel,
+body[data-hud="compact"] .touch-hydraulic,
+body[data-hud="compact"] .operation-prompt{background:#192027c2}
+body[data-hud="clean"] .telemetry,
+body[data-hud="clean"] .operation-tools,
+body[data-hud="clean"] .camera-toolbar,
+body[data-hud="clean"] .warehouse-info,
+body[data-hud="clean"] .operation-prompt,
+body[data-hud="clean"] footer>div{display:none!important}
+@media(pointer:fine){body[data-hud="clean"] .touch-hydraulic{display:none!important}}
+body[data-hud="clean"] #mini-hud{display:flex}
+/* ============ telas baixas: colunas separadas, sem sobreposicao ============ */
+@media(pointer:fine) and (min-width:761px) and (max-height:720px){
+  .telemetry{top:92px;width:200px;padding:12px 13px 0}
+  .speed-line strong{font-size:37px}.gauge{margin:11px 0}
+  .telemetry-row{margin-bottom:9px;font-size:12px}
+  .telemetry-foot{display:none}
+  .speed-control{margin:0 0 9px}.speed-options button{min-height:34px}
+  .warehouse-info{display:none}
+  .operation-tools{top:92px;width:212px}
+  #horn{min-height:42px;padding:8px 12px;font-size:13px}
+  .timer-panel{padding:11px}.timer-readout strong{font-size:32px}
+  .timer-goal{font-size:12px;margin:5px 0 7px}
+  .touch-hydraulic{left:auto!important;right:30px!important;top:auto!important;bottom:60px!important;width:200px;padding:10px}
+  .touch-hydraulic>div{margin:8px 0}
+  .touch-hydraulic button{height:44px;font-size:18px}
+  .touch-hydraulic .shift-row button{height:35px;font-size:14px}
+  .touch-hydraulic .hydraulic-instruction{display:none}
+  .operation-prompt{left:262px!important;right:254px!important;width:auto!important;min-width:0!important;transform:none!important;bottom:60px}
+  #toast{left:auto;right:254px;top:92px;max-width:330px}
+  #mini-hud{top:88px}
+}
+@media(pointer:fine) and (min-width:761px) and (max-width:1050px) and (max-height:720px){
+  .operation-tools{left:20px}.touch-hydraulic{right:20px!important}
+  .operation-prompt{left:248px!important;right:238px!important}#toast{right:238px}
+}
 </style>
 </head>
 <body>
@@ -120,11 +181,12 @@
 <canvas id="scene" aria-label="Simulador 3D de empilhadeira. Use as setas para dirigir e C para trocar a câmera." tabindex="0"></canvas>
 <header class="topbar">
 <div class="identity"><span class="wordmark">STILL<span></span></span><div class="model"><strong>RX 20-16</strong><span>SIMULADOR DE OPERAÇÃO</span></div></div>
-<div class="header-right"><span class="session">GALPÃO 01 <i></i> OPERAÇÃO LIVRE</span><button id="audio" class="icon-button" aria-label="Ativar sons" title="Ativar sons">♪</button><button id="lights" class="icon-button" aria-label="Ligar faróis" title="Faróis · L">☀</button><button id="help" class="icon-button" aria-label="Ver controles" title="Controles">?</button><button id="fullscreen" class="icon-button" aria-label="Tela cheia" title="Tela cheia">⛶</button></div>
+<div class="header-right"><span class="session">GALPÃO 01 <i></i> OPERAÇÃO LIVRE</span><button id="audio" class="icon-button" aria-label="Ativar sons" title="Ativar sons">♪</button><button id="lights" class="icon-button" aria-label="Ligar faróis" title="Faróis · L">☀</button><button id="hud" class="icon-button" aria-label="Painéis na tela" title="Painéis · tecla V"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9.5h18M9 9.5V19.5"/></svg></button><button id="help" class="icon-button" aria-label="Ver controles" title="Controles">?</button><button id="fullscreen" class="icon-button" aria-label="Tela cheia" title="Tela cheia">⛶</button></div>
 </header>
 <section class="camera-toolbar" aria-label="Selecionar câmera"><span class="toolbar-label">CÂMERA</span><div class="camera-buttons"><button data-camera="cab">Cockpit <kbd>C</kbd></button><button data-camera="follow" class="active">Externa <kbd>C</kbd></button><button data-camera="orbit">Orbital <kbd>O</kbd></button></div><span id="camera-hint">A câmera acompanha o equipamento</span></section>
-<aside class="telemetry" aria-label="Instrumentos"><div class="speed-line"><span id="gear">N</span><div><strong id="speed">0,0</strong><span class="unit">km/h</span></div></div><div class="gauge"><i id="speed-bar"></i></div><div class="speed-control"><div class="speed-caption"><span>VELOCIDADE</span><strong id="speed-mode">Normal</strong></div><div class="speed-options" role="group" aria-label="Nível de velocidade"><button data-speed="precision" aria-label="Nível 1: Precisão, 3 km/h" title="Precisão · tecla 1">1 <small>3 km/h</small></button><button data-speed="normal" class="active" aria-label="Nível 2: Normal, 6 km/h" title="Normal · tecla 2">2 <small>6 km/h</small></button><button data-speed="travel" aria-label="Nível 3: Deslocamento, 8 km/h" title="Deslocamento · tecla 3">3 <small>8 km/h</small></button></div></div><div class="telemetry-row fork-row"><span>Altura dos garfos</span><strong><span id="height">0,05</span> <small>m</small></strong></div><div class="telemetry-row load-row"><span>Carga</span><strong id="load">Sem carga</strong></div><div class="telemetry-row align-row"><span>Alinhamento</span><strong id="alignment">Aproximar</strong></div><div class="telemetry-foot">ELÉTRICA <span>LIMITADOR <b id="limit">8</b> km/h</span></div></aside>
+<aside class="telemetry" aria-label="Instrumentos"><div class="speed-line"><span id="gear">N</span><div><strong id="speed">0,0</strong><span class="unit">km/h</span></div></div><div class="gauge"><i id="speed-bar"></i></div><div class="speed-control"><div class="speed-caption"><span>VELOCIDADE</span><strong id="speed-mode">Normal</strong></div><div class="speed-options" role="group" aria-label="Nível de velocidade"><button data-speed="precision" aria-label="Nível 1: Precisão, 3 km/h" title="Precisão · tecla 1">1 <small>3 km/h</small></button><button data-speed="normal" class="active" aria-label="Nível 2: Normal, 6 km/h" title="Normal · tecla 2">2 <small>6 km/h</small></button><button data-speed="travel" aria-label="Nível 3: Deslocamento, 8 km/h" title="Deslocamento · tecla 3">3 <small>8 km/h</small></button></div></div><div class="telemetry-row fork-row"><span>Altura dos garfos</span><strong><span id="height">0,05</span> <small>m</small></strong></div><div class="telemetry-row shift-hud"><span>Deslocador</span><strong id="shift-value">Centro</strong></div><div class="telemetry-row load-row"><span>Carga</span><strong id="load">Sem carga</strong></div><div class="telemetry-row align-row"><span>Alinhamento</span><strong id="alignment">Aproximar</strong></div><div class="telemetry-foot">ELÉTRICA <span>LIMITADOR <b id="limit">8</b> km/h</span></div></aside>
 <div class="warehouse-info" aria-label="Carga e armazenagem"><strong id="product-name">Escolha uma carga</strong><span id="product-size">Caixas · tambores · sacarias · bobinas</span><span id="rack-vacancies">51 / 54 vagas livres</span></div>
+<div id="mini-hud" aria-hidden="true"><span><b id="mini-speed">0,0</b> km/h</span><span>garfos <b id="mini-height">0,05</b> m</span><span id="mini-load">sem carga</span></div>
 <div id="toast" role="status" aria-live="polite"></div>
 <section class="operation-tools" aria-label="Buzina e exercício cronometrado">
  <button id="horn" data-hold="horn" title="Segure H ou este botão" aria-label="Segure para buzinar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 10h4l7-5v14l-7-5H4zM7 14l1 5h3l-1-4M18 8q4 4 0 8M20 5q6 7 0 14"/></svg><span>BUZINA <kbd>H</kbd></span></button>
@@ -140,10 +202,10 @@
  </section>
 </section>
 <div class="operation-prompt"><span id="prompt-dot"></span><div><strong id="prompt-title">Aproxime-se do pallet</strong><span id="prompt-detail">Mantenha os garfos baixos e entre pelos vãos.</span></div><button id="pickup" class="pickup"><span id="pickup-label">PEGAR</span> <kbd>ENTER</kbd></button></div>
-<div class="mobile-controls" aria-label="Controles de toque"><div class="touch-steer"><span>DIREÇÃO</span><div><button data-hold="left" aria-label="Virar para a esquerda">←</button><button data-hold="right" aria-label="Virar para a direita">→</button></div></div><section class="touch-hydraulic" aria-label="Elevação dos garfos"><span>ELEVAÇÃO DOS GARFOS</span><div><button data-hold="lift" aria-label="Segure para subir os garfos">↑ <small>SUBIR</small><kbd>␣</kbd></button><button data-hold="lower" aria-label="Segure para descer os garfos">↓ <small>DESCER</small><kbd>F</kbd></button></div><span id="hydraulic-status">0,05 / 3,23 m</span><span class="hydraulic-instruction">Segure ESPAÇO para subir. Solte para parar.</span></section><div class="touch-drive"><span>TRAÇÃO</span><button data-hold="forward" aria-label="Andar para frente">▲ <small>FRENTE</small></button><button data-hold="reverse" aria-label="Andar de ré">▼ <small>RÉ</small></button></div></div>
-<footer><div><span class="keys">↑ ↓</span> Tração <span class="keys">← →</span> Direção <span class="keys">ESPAÇO / F</span> Garfos <span class="keys">H</span> Buzina</div><span class="footer-note">Reconstrução por referência · Uso demonstrativo</span><button id="reset">Reiniciar posição ↺</button></footer>
+<div class="mobile-controls" aria-label="Controles de toque"><div class="touch-steer"><span>DIREÇÃO</span><div><button data-hold="left" aria-label="Virar para a esquerda">←</button><button data-hold="right" aria-label="Virar para a direita">→</button></div></div><section class="touch-hydraulic" aria-label="Elevação dos garfos"><span>ELEVAÇÃO DOS GARFOS</span><div><button data-hold="lift" aria-label="Segure para subir os garfos">↑ <small>SUBIR</small><kbd>␣</kbd></button><button data-hold="lower" aria-label="Segure para descer os garfos">↓ <small>DESCER</small><kbd>F</kbd></button></div><div class="shift-row" aria-label="Deslocador lateral"><button data-hold="shiftLeft" aria-label="Segure para deslocar os garfos para a esquerda">◄ <small>ESQ.</small><kbd>A</kbd></button><button data-hold="shiftCenter" aria-label="Segure para centralizar os garfos">◎ <small>CENTRO</small><kbd>S</kbd></button><button data-hold="shiftRight" aria-label="Segure para deslocar os garfos para a direita">► <small>DIR.</small><kbd>D</kbd></button></div><span id="hydraulic-status">0,05 / 3,23 m</span><span class="hydraulic-instruction">Segure ESPAÇO para subir e A / D para deslocar os garfos.</span></section><div class="touch-drive"><span>TRAÇÃO</span><button data-hold="forward" aria-label="Andar para frente">▲ <small>FRENTE</small></button><button data-hold="reverse" aria-label="Andar de ré">▼ <small>RÉ</small></button></div></div>
+<footer><div><span class="keys">↑ ↓</span> Tração <span class="keys">← →</span> Direção <span class="keys">ESPAÇO / F</span> Garfos <span class="keys">A S D</span> Deslocador <span class="keys">H</span> Buzina <span class="keys">V</span> Painéis</div><span class="footer-note">Reconstrução por referência · Uso demonstrativo</span><button id="reset">Reiniciar posição ↺</button></footer>
 <div id="loading"><span class="loader"></span><strong>Preparando o equipamento</strong><span>Carroceria, cockpit e galpão</span></div>
-<dialog id="instructions"><button id="close-help" class="close" aria-label="Fechar">×</button><span class="eyebrow">STILL RX 20-16</span><h1>Assuma os comandos.</h1><p>Entre nos vãos do pallet. Quando estiver alinhado e parado, mantenha ESPAÇO, SUBIR ou R pressionado: a carga se prende aos garfos e sobe. Você também pode usar PEGAR.</p><div class="help-grid"><span>Frente / ré</span><b>↑ / ↓</b><span>Esterçamento traseiro</span><b>← / →</b><span>Subir enquanto segura</span><b>Espaço · R · Page Up</b><span>Descer garfos</span><b>F · Page Down</b><span>Pegar / soltar pallet</span><b>Enter</b><span>Cockpit / externa</span><b>C</b><span>Orbital · arrastar e zoom</span><b>I ou O · mouse / toque</b><span>Buzina enquanto segura</span><b>H · botão BUZINA</b><span>Faróis</span><b>L</b><span>Velocidades 3 / 6 / 8 km/h</span><b>1 / 2 / 3</b></div><p><strong>Para guardar material:</strong> escolha qualquer vaga livre dos porta-pallets A01–A04, B01–B04 ou C01, com marcas verdes. Há 54 posições, das quais 51 começam livres. Suba os garfos um pouco acima de 0,40 m, 1,86 m ou 2,96 m. Avance com a carga sobre a vaga, desça até apoiar e pressione GUARDAR / SOLTAR. Ao soltar, os garfos baixam um pouco e ficam livres. Recue em linha reta até sair do pallet; depois baixe os garfos e procure outra carga. A carga permanece na prateleira e pode ser retirada depois.</p><p><strong>Som:</strong> o áudio começa ao tocar na tela ou usar o teclado. O motor acompanha a velocidade, a hidráulica soa ao mover os garfos e o alarme toca em ré. Segure H ou BUZINA para buzinar. O botão ♪ liga ou desliga os sons.</p><p><strong>Exercício com cronômetro:</strong> escolha de 1 a 30 minutos e pressione INICIAR. A empilhadeira e os pallets voltam à posição inicial. Guarde um pallet com carga em qualquer vaga livre e compatível com o tamanho da carga, apoie na prateleira e pressione GUARDAR / SOLTAR para concluir. Soltar no piso ou guardar um pallet vazio não conclui o exercício. Há 12 cargas no piso (a maioria nas áreas demarcadas atrás da posição inicial) e 3 nas prateleiras: caixas, tambores, sacarias, caixotes, bobinas e big bags, com bases e alturas diferentes. Cargas altas precisam de um nível com espaço suficiente acima. O painel mostra o tempo restante e o decorrido, com aviso ao vencer o prazo. A contagem continua ao abrir a ajuda ou trocar de aba. RECOMEÇAR inicia uma nova tentativa; CANCELAR volta à operação livre.</p><p>No cockpit, arraste para olhar o painel e os pedais. Na orbital, arraste para girar; use a roda ou dois dedos para aproximar.</p><p>No celular, direção à esquerda, garfos ao centro e tração à direita. É possível usar os comandos ao mesmo tempo.</p><div class="reference-note">Geometria própria baseada na RX 20-16, geração com cabine tubular. Não é um modelo CAD oficial nem um treinamento certificado. Três níveis de velocidade: 3, 6 e 8 km/h. Com garfos elevados, limite de 3 km/h; com carga baixa, até 6 km/h; em ré, até 5 km/h. Curvas podem reduzir o limite atual.<br><a href="https://www.trucksdirectuk.co.uk/wp-content/uploads/2025/03/RX20-Series-Data-Spec-sheets.pdf" target="_blank" rel="noreferrer">Ficha técnica STILL ↗</a></div><button id="start" class="primary">Voltar à operação</button></dialog>
+<dialog id="instructions"><button id="close-help" class="close" aria-label="Fechar">×</button><span class="eyebrow">STILL RX 20-16</span><h1>Assuma os comandos.</h1><p>Entre nos vãos do pallet e mantenha ESPAÇO, SUBIR ou R pressionado: assim que os garfos estão dentro do pallet, a carga se prende e a subida começa na mesma hora, sem precisar acertar a altura exata. Você também pode usar PEGAR.</p><p><strong>Deslocador lateral:</strong> os garfos correm 11 cm para cada lado. Segure A (ou Q) para a esquerda, D (ou E) para a direita e S para voltar ao centro; no celular use a linha ESQ. · CENTRO · DIR. O painel mostra o deslocamento em centímetros. Use-o para acertar o pallet sem manobrar a máquina e para centralizar a carga na vaga da prateleira.</p><div class="help-grid"><span>Frente / ré</span><b>↑ / ↓</b><span>Esterçamento traseiro</span><b>← / →</b><span>Subir enquanto segura</span><b>Espaço · R · Page Up</b><span>Descer garfos</span><b>F · Page Down</b><span>Deslocar garfos · esq. / dir.</span><b>A / D · Q / E</b><span>Centralizar deslocador</span><b>S</b><span>Pegar / soltar pallet</span><b>Enter</b><span>Cockpit / externa</span><b>C</b><span>Orbital · arrastar e zoom</span><b>I ou O · mouse / toque</b><span>Buzina enquanto segura</span><b>H · botão BUZINA</b><span>Faróis</span><b>L</b><span>Painéis: completo · reduzido · limpo</span><b>V</b><span>Velocidades 3 / 6 / 8 km/h</span><b>1 / 2 / 3</b></div><p><strong>Para guardar material:</strong> escolha qualquer vaga livre dos porta-pallets A01–A04, B01–B04 ou C01, com marcas verdes. Há 54 posições, das quais 51 começam livres. Suba os garfos um pouco acima de 0,40 m, 1,86 m ou 2,96 m. Avance com a carga sobre a vaga, desça até apoiar e pressione GUARDAR / SOLTAR. Ao soltar, os garfos baixam um pouco e ficam livres. Recue em linha reta até sair do pallet; depois baixe os garfos e procure outra carga. A carga permanece na prateleira e pode ser retirada depois.</p><p><strong>Som:</strong> o áudio começa ao tocar na tela ou usar o teclado. O motor acompanha a velocidade, a hidráulica soa ao mover os garfos e o alarme toca em ré. Segure H ou BUZINA para buzinar. O botão ♪ liga ou desliga os sons.</p><p><strong>Exercício com cronômetro:</strong> escolha de 1 a 30 minutos e pressione INICIAR. A empilhadeira e os pallets voltam à posição inicial. Guarde um pallet com carga em qualquer vaga livre e compatível com o tamanho da carga, apoie na prateleira e pressione GUARDAR / SOLTAR para concluir. Soltar no piso ou guardar um pallet vazio não conclui o exercício. Há 12 cargas no piso (a maioria nas áreas demarcadas atrás da posição inicial) e 3 nas prateleiras: caixas, tambores, sacarias, caixotes, bobinas e big bags, com bases e alturas diferentes. Cargas altas precisam de um nível com espaço suficiente acima. O painel mostra o tempo restante e o decorrido, com aviso ao vencer o prazo. A contagem continua ao abrir a ajuda ou trocar de aba. RECOMEÇAR inicia uma nova tentativa; CANCELAR volta à operação livre.</p><p><strong>Tela limpa:</strong> a tecla V (ou o botão de painéis, no topo) alterna entre painéis completos, painéis reduzidos e vista limpa. Na vista limpa ficam só a imagem e um indicador discreto de velocidade, altura dos garfos e carga — útil para acompanhar as movimentações do equipamento.</p><p>No cockpit, arraste para olhar o painel e os pedais. Na orbital, arraste para girar; use a roda ou dois dedos para aproximar.</p><p>No celular, direção à esquerda, garfos ao centro e tração à direita. É possível usar os comandos ao mesmo tempo.</p><div class="reference-note">Geometria própria baseada na RX 20-16, geração com cabine tubular. Não é um modelo CAD oficial nem um treinamento certificado. Três níveis de velocidade: 3, 6 e 8 km/h. Com garfos elevados, limite de 3 km/h; com carga baixa, até 6 km/h; em ré, até 5 km/h. Curvas podem reduzir o limite atual.<br><a href="https://www.trucksdirectuk.co.uk/wp-content/uploads/2025/03/RX20-Series-Data-Spec-sheets.pdf" target="_blank" rel="noreferrer">Ficha técnica STILL ↗</a></div><button id="start" class="primary">Voltar à operação</button></dialog>
 </main>
 <!-- Versão portátil: estilos, simulador e Three.js incluídos neste HTML. -->
 <script>
@@ -24465,11 +24527,14 @@ void main() {
     carriage.name = "fork_carriage";
     carriage.position.set(0, -0.04, 0.145);
     for (let y of [0.11, 0.42]) box(carriage, 0.94, 0.068, 0.072, 0, y, 0, materials.steel, 6e-3);
+    const shifter = new Group();
+    carriage.add(shifter);
+    shifter.name = "fork_shifter";
     for (let side of [-1, 1]) {
       box(carriage, 0.058, 0.51, 0.054, side * 0.434, 0.263, -0.027, materials.dark, 5e-3);
-      const f = mesh(carriage, forkGeometry(), materials.steel, side * 0.235 + 0.04, 0, 0.035);
-      box(carriage, 0.11, 0.075, 0.1, side * 0.235, 0.438, 0.013, materials.dark, 8e-3);
-      cyl(carriage, 0.013, 0.013, 0.034, side * 0.235, 0.49, 0.028, materials.chrome, 12);
+      mesh(shifter, forkGeometry(), materials.steel, side * 0.235 + 0.04, 0, 0.035);
+      box(shifter, 0.11, 0.075, 0.1, side * 0.235, 0.438, 0.013, materials.dark, 8e-3);
+      cyl(shifter, 0.013, 0.013, 0.034, side * 0.235, 0.49, 0.028, materials.chrome, 12);
     }
     for (let side of [-1, 1]) box(carriage, 0.025, 0.75, 0.025, side * 0.458, 0.443, -0.057, materials.dark, 4e-3);
     box(carriage, 0.943, 0.025, 0.025, 0, 0.807, -0.057, materials.dark, 4e-3);
@@ -24502,7 +24567,7 @@ void main() {
       const glass = box(body, 0.077, 0.058, 4e-3, side * 0.524, 1.8, 0.182, metal("#788b94", 0.12, 0.95), 8e-3);
       glass.rotation.y = side * 0.35;
     }
-    return { root, body, fronts, rear, steeringAxle, steeringWheel, joysticks, pedals, carriage, mast, inner, piston, chainLinks, lamps, beaconMat, updateDisplay };
+    return { root, body, fronts, rear, steeringAxle, steeringWheel, joysticks, pedals, carriage, shifter, mast, inner, piston, chainLinks, lamps, beaconMat, updateDisplay };
   }
   var cargoM = { blue: metal("#276186", 0.37, 0.58), paper: metal("#d7caaa", 0.91, 0), core: metal("#806546", 0.94, 0), fabric: metal("#d8ceb5", 0.96, 0), bag: metal("#e1e1cb", 0.91, 0), seam: metal("#8e917c", 0.97, 0), band: metal("#385263", 0.78, 0.05) };
   var cargoTextureReady = false;
@@ -24626,7 +24691,8 @@ void main() {
   }
 
   // entrega/simulador-github-pages/physics.js
-  var SETTINGS = { wheelbase: 1.341, frontAxle: 0.605, maxForward: 8 / 3.6, maxReverse: 5 / 3.6, minFork: 0.045, maxFork: 3.23, pickupOffset: 1.63, supportOffset: 0.06 };
+  var SETTINGS = { wheelbase: 1.341, frontAxle: 0.605, maxForward: 8 / 3.6, maxReverse: 5 / 3.6, minFork: 0.045, maxFork: 3.23, pickupOffset: 1.63, supportOffset: 0.06, shiftRange: 0.11, shiftSpeed: 0.085 };
+  var PICKUP = { lateral: 0.12, back: 0.24, front: 0.18, angle: 0.18, minHeight: -0.04, maxHeight: 0.12, speed: 0.3 };
   var SPEED_MODES = { precision: { name: "Precisão", kmh: 3, maxForward: 3 / 3.6 }, normal: { name: "Normal", kmh: 6, maxForward: 6 / 3.6 }, travel: { name: "Deslocamento", kmh: 8, maxForward: 8 / 3.6 } };
   var loadOffset = (p) => SETTINGS.pickupOffset + Math.max(0, cargoSize(p).depth - 0.8) / 2;
   var clamp2 = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -24668,8 +24734,8 @@ void main() {
     return a;
   }
   function hydraulicBoxes(s) {
-    const a = [];
-    for (let x of [-0.235, 0.235]) a.push(relativeBox(s, x, 1.604, 0.043, 0.52, s.fork, s.fork + 0.04));
+    const a = [], sh = s.shift || 0;
+    for (let x of [-0.235, 0.235]) a.push(relativeBox(s, x + sh, 1.604, 0.043, 0.52, s.fork, s.fork + 0.04));
     a.push(relativeBox(s, 0, 1, 0.471, 0.08, s.fork + 0.015, s.fork + 0.815));
     const extension = Math.max(0, s.fork - 1.42);
     if (extension > 0) a.push(relativeBox(s, 0, 0.938, 0.34, 0.08, 2.1, 2.16 + extension));
@@ -24684,8 +24750,10 @@ void main() {
     const l = worldToLocal(s, p.x, p.z);
     let angle = Math.abs(Math.atan2(Math.sin(s.yaw - p.yaw), Math.cos(s.yaw - p.yaw)));
     angle = Math.min(angle, Math.PI - angle);
-    const relativeHeight = s.fork - (p.y || 0), offset = loadOffset(p);
-    return { local: l, angle, relativeHeight, ready: !p.attached && Math.abs(l.x) < 0.065 && l.z >= offset - 0.12 && l.z <= offset + 0.1 && angle < 0.075 && relativeHeight >= 0.042 && relativeHeight <= 0.064 && Math.abs(s.v) < 0.16 };
+    const relativeHeight = s.fork - (p.y || 0), offset = loadOffset(p), lateral = l.x - (s.shift || 0);
+    const inside = !p.attached && Math.abs(lateral) < PICKUP.lateral && l.z >= offset - PICKUP.back && l.z <= offset + PICKUP.front && angle < PICKUP.angle && Math.abs(s.v) < PICKUP.speed;
+    const heightOk = relativeHeight >= PICKUP.minHeight && relativeHeight <= PICKUP.maxHeight;
+    return { local: l, lateral, angle, relativeHeight, inside, ready: inside && heightOk };
   }
   function containedInSlot(footprint, slot) {
     const c = worldToLocal(slot, footprint.x, footprint.z), a = footprint.yaw - slot.yaw, { width, depth } = cargoSize(footprint);
@@ -24711,11 +24779,12 @@ void main() {
       this.reset();
     }
     reset() {
-      this.state = { x: -1.2, z: -3.9, yaw: 0, v: 0, steer: 0, fork: 0.05, loaded: null };
+      this.state = { x: -1.2, z: -3.9, yaw: 0, v: 0, steer: 0, fork: 0.05, shift: 0, loaded: null };
       this.released = null;
       this.time = 0;
       this.collisionCooldown = 0;
       this.forkBlocked = false;
+      this.shiftBlocked = false;
       this.maxSpeed = this.speedLimit();
     }
     speedLimit() {
@@ -24732,7 +24801,7 @@ void main() {
     }
     collision(s, includeForks = true, hydraulicsOnly = false) {
       const parts = hydraulicsOnly ? hydraulicBoxes(s) : truckBoxes(s, includeForks), size = s.loaded ? cargoSize(s.loaded) : null;
-      let carried = size ? relativeBox(s, 0, loadOffset(s.loaded), size.width / 2, size.depth / 2, s.fork - SETTINGS.supportOffset, s.fork - SETTINGS.supportOffset + size.height) : null;
+      let carried = size ? relativeBox(s, s.shift || 0, loadOffset(s.loaded), size.width / 2, size.depth / 2, s.fork - SETTINGS.supportOffset, s.fork - SETTINGS.supportOffset + size.height) : null;
       for (let o of this.obstacles) {
         if (parts.some((b) => overlaps(b, o)) || carried && overlaps(carried, o)) return "obstacle";
       }
@@ -24763,6 +24832,7 @@ void main() {
       this.time += dt;
       this.collisionCooldown = Math.max(0, this.collisionCooldown - dt);
       let steering = (i.left ? 1 : 0) - (i.right ? 1 : 0), throttle = (i.forward ? 1 : 0) - (i.reverse ? 1 : 0), lift = (i.lift ? 1 : 0) - (i.lower ? 1 : 0);
+      let side = (i.shiftLeft ? 1 : 0) - (i.shiftRight ? 1 : 0);
       s.steer = moveToward(s.steer, steering * 0.97, dt * 1.55);
       let max = this.speedLimit();
       this.maxSpeed = max;
@@ -24797,12 +24867,28 @@ void main() {
       if (this.released && !this.withdrawalPending()) this.released = null;
       if (this.released) lift = 0;
       this.forkBlocked = false;
+      this.shiftBlocked = false;
+      let sideTarget = null;
+      if (i.shiftCenter) sideTarget = moveToward(s.shift || 0, 0, dt * SETTINGS.shiftSpeed);
+      else if (side) sideTarget = clamp2((s.shift || 0) + side * dt * SETTINGS.shiftSpeed, -SETTINGS.shiftRange, SETTINGS.shiftRange);
+      if (sideTarget !== null && Math.abs(sideTarget - (s.shift || 0)) > 1e-6) {
+        const shifted = { ...s, shift: sideTarget };
+        if (!this.collision(shifted, true, true)) {
+          s.shift = sideTarget;
+        } else {
+          this.shiftBlocked = true;
+          if (this.collisionCooldown === 0) {
+            event = { type: "collision", kind: "hydraulic" };
+            this.collisionCooldown = 0.7;
+          }
+        }
+      }
       if (lift) {
         if (lift > 0 && !s.loaded) {
           const n = this.nearest();
           if (n?.ready) {
             const result = this.attach(n.p);
-            if (result.ok) event = { type: "pickup", message: "Pallet apoiado nos garfos. Continue segurando SUBIR." };
+            if (result.ok) event = { type: "pickup", message: "Pallet preso aos garfos. Continue segurando SUBIR." };
           }
         }
         let h = clamp2(s.fork + lift * dt * (s.loaded ? 0.3 : 0.43), s.loaded ? SETTINGS.supportOffset : SETTINGS.minFork, SETTINGS.maxFork);
@@ -24818,7 +24904,7 @@ void main() {
         }
       }
       if (s.loaded) {
-        let pos = localToWorld(s, 0, loadOffset(s.loaded));
+        let pos = localToWorld(s, s.shift || 0, loadOffset(s.loaded));
         Object.assign(s.loaded, { ...pos, y: s.fork - SETTINGS.supportOffset, yaw: s.yaw });
       }
       return event;
@@ -24828,7 +24914,7 @@ void main() {
       for (let p of this.pallets) {
         if (p === this.state.loaded) continue;
         let a = alignment(this.state, p);
-        let d = Math.hypot(a.local.x, a.local.z - loadOffset(p), a.relativeHeight - 0.05);
+        let d = Math.hypot(a.lateral, a.local.z - loadOffset(p), a.relativeHeight - 0.05);
         if (d < bestD) {
           bestD = d;
           best = { p, ...a, d };
@@ -24842,7 +24928,7 @@ void main() {
     storageTarget() {
       const s = this.state;
       if (!s.loaded) return null;
-      const pos = localToWorld(s, 0, loadOffset(s.loaded)), size = cargoSize(s.loaded);
+      const pos = localToWorld(s, s.shift || 0, loadOffset(s.loaded)), size = cargoSize(s.loaded);
       let best = null, score = Infinity;
       for (let slot of this.slots) {
         if (this.slotOccupied(slot) || !fitsSlot(s.loaded, slot)) continue;
@@ -24855,7 +24941,7 @@ void main() {
       return best;
     }
     support(tolerance = 0.012) {
-      const s = this.state, pos = localToWorld(s, 0, loadOffset(s.loaded)), bottom = s.fork - SETTINGS.supportOffset;
+      const s = this.state, pos = localToWorld(s, s.shift || 0, loadOffset(s.loaded)), bottom = s.fork - SETTINGS.supportOffset;
       if (bottom <= tolerance) return { y: 0, slot: null };
       for (let slot of this.slots) {
         if (!this.slotOccupied(slot) && fitsSlot(s.loaded || {}, slot) && bottom >= slot.y - 1e-3 && bottom - slot.y <= tolerance && containedInSlot({ ...s.loaded, ...pos, yaw: s.yaw }, slot)) return { y: slot.y, slot };
@@ -24875,17 +24961,17 @@ void main() {
       this.released = null;
       p.attached = true;
       p.slotId = null;
-      const pos = localToWorld(s, 0, loadOffset(s.loaded));
+      const pos = localToWorld(s, s.shift || 0, loadOffset(s.loaded));
       Object.assign(p, { ...pos, y: s.fork - SETTINGS.supportOffset, yaw: s.yaw });
       return { ok: true, type: "pickup", p, message: "Pallet preso. Segure SUBIR para elevar a carga." };
     }
     toggleLoad() {
       const s = this.state;
-      if (Math.abs(s.v) > 0.16) return { ok: false, message: "Pare o equipamento para operar a carga." };
+      if (Math.abs(s.v) > PICKUP.speed) return { ok: false, message: "Reduza a velocidade para operar a carga." };
       if (s.loaded) {
         const support = this.support(0.03);
         if (!support) return { ok: false, message: "Centralize a carga em uma vaga livre e desça até apoiar na prateleira ou no piso." };
-        const p = s.loaded, pos = localToWorld(s, 0, loadOffset(s.loaded));
+        const p = s.loaded, pos = localToWorld(s, s.shift || 0, loadOffset(s.loaded));
         Object.assign(p, { ...pos, yaw: s.yaw, y: support.y, attached: false, slotId: support.slot?.id || null });
         s.fork = support.y + 0.045;
         s.loaded = null;
@@ -25155,14 +25241,15 @@ void main() {
       this.master.gain.setTargetAtTime(this.enabled && !paused ? 0.48 : 0, t, 0.025);
       const set = (voice, level) => voice.gain.gain.setTargetAtTime(level, t, 0.028);
       const lifting = !!sim2.input.lift !== !!sim2.input.lower;
-      const hydraulics = lifting && !sim2.forkBlocked && !sim2.withdrawalPending() && (sim2.input.lift ? s.fork < SETTINGS.maxFork - 1e-3 : s.fork > (s.loaded ? SETTINGS.supportOffset : SETTINGS.minFork) + 1e-3);
+      const shifting = (!!sim2.input.shiftLeft !== !!sim2.input.shiftRight || !!sim2.input.shiftCenter) && !sim2.shiftBlocked;
+      const hydraulics = shifting || lifting && !sim2.forkBlocked && !sim2.withdrawalPending() && (sim2.input.lift ? s.fork < SETTINGS.maxFork - 1e-3 : s.fork > (s.loaded ? SETTINGS.supportOffset : SETTINGS.minFork) + 1e-3);
       this.motor.osc.frequency.setTargetAtTime(68 + speed * 210 + (working ? 12 : 0), t, 0.1);
       this.inverter.osc.frequency.setTargetAtTime(320 + speed * 1100, t, 0.1);
       set(this.motor, 0.014 + speed * 0.1 + (working && v > 0.02 ? 0.025 : 0));
       set(this.inverter, v > 0.02 ? 0.011 + speed * 0.032 : 0);
       this.rolling.filter.frequency.setTargetAtTime(250 + speed * 950, t, 0.12);
       set(this.rolling, speed * 0.22);
-      this.pump.osc.frequency.setTargetAtTime(sim2.input.lift ? s.loaded ? 185 : 165 : 135, t, 0.08);
+      this.pump.osc.frequency.setTargetAtTime(shifting && !lifting ? 148 : sim2.input.lift ? s.loaded ? 185 : 165 : 135, t, 0.08);
       set(this.pump, hydraulics ? 0.075 : 0);
       set(this.flow, hydraulics ? 0.055 : 0);
       set(this.reverse, s.v < -0.02 && sim2.time % 1.05 < 0.39 ? 0.16 : 0);
@@ -25306,7 +25393,7 @@ void main() {
     for (let m of remove) m.removeFromParent();
   }
   var wheelSpins = [...truck.fronts, ...truck.rear].map((w) => w.spin);
-  var moving = [truck.body, truck.steeringAxle, truck.steeringWheel, ...truck.joysticks, ...truck.pedals, truck.carriage, truck.inner, truck.piston, ...truck.chainLinks, ...wheelSpins];
+  var moving = [truck.body, truck.steeringAxle, truck.steeringWheel, ...truck.joysticks, ...truck.pedals, truck.carriage, truck.shifter, truck.inner, truck.piston, ...truck.chainLinks, ...wheelSpins];
   batchStatic(truck.root, new Set(moving));
   for (let g of moving) if (!g.isMesh) batchStatic(g, new Set(moving));
   batchStatic(world.root);
@@ -25443,7 +25530,7 @@ void main() {
     for (let evt of ["pointerup", "pointercancel", "lostpointercapture"]) b.addEventListener(evt, end);
     b.addEventListener("contextmenu", (e) => e.preventDefault());
   }
-  var keyMap = { ArrowUp: "forward", ArrowDown: "reverse", ArrowLeft: "left", ArrowRight: "right", Space: "lift", KeyR: "lift", PageUp: "lift", KeyF: "lower", PageDown: "lower", KeyH: "horn" };
+  var keyMap = { ArrowUp: "forward", ArrowDown: "reverse", ArrowLeft: "left", ArrowRight: "right", Space: "lift", KeyR: "lift", PageUp: "lift", KeyF: "lower", PageDown: "lower", KeyH: "horn", KeyA: "shiftLeft", KeyQ: "shiftLeft", Numpad4: "shiftLeft", KeyD: "shiftRight", KeyE: "shiftRight", Numpad6: "shiftRight", KeyS: "shiftCenter", Numpad5: "shiftCenter" };
   function chooseSpeed(mode) {
     if (!sim.setSpeedMode(mode)) return;
     updateHud();
@@ -25478,6 +25565,7 @@ void main() {
     if (e.code === "KeyC") selectCamera(cameraMode === "cab" ? "follow" : "cab");
     if (e.code === "KeyO" || e.code === "KeyI") selectCamera("orbit");
     if (e.code === "KeyL") toggleLights();
+    if (e.code === "KeyV") cycleHud();
   });
   addEventListener("keyup", (e) => {
     if (e.code === "Space" && !e.target.closest?.('input,textarea,select,[contenteditable="true"]')) e.preventDefault();
@@ -25499,8 +25587,8 @@ void main() {
     for (let p of world.pallets) {
       const m = world.palletMeshes[p.id];
       if (p.attached) {
-        if (m.parent !== truck.carriage) {
-          truck.carriage.add(m);
+        if (m.parent !== truck.shifter) {
+          truck.shifter.add(m);
           m.position.set(0, -SETTINGS.supportOffset, loadOffset(p) - 0.909 - 0.145);
           m.rotation.set(0, 0, 0);
         }
@@ -25601,6 +25689,24 @@ void main() {
     $("#lights").setAttribute("aria-label", lightsOn ? "Desligar faróis" : "Ligar faróis");
   }
   $("#lights").addEventListener("click", toggleLights);
+  var HUD_MODES = ["full", "compact", "clean"], HUD_NAMES = { full: "Painéis completos", compact: "Painéis reduzidos", clean: "Vista limpa" }, hudMode = "full";
+  function setHud(mode, announce = true) {
+    if (!HUD_MODES.includes(mode)) return;
+    hudMode = mode;
+    document.body.dataset.hud = mode;
+    $("#hud").classList.toggle("on", mode !== "full");
+    $("#hud").setAttribute("aria-label", HUD_NAMES[mode]);
+    $("#hud").title = `${HUD_NAMES[mode]} \u00b7 tecla V`;
+    if (announce) toast(`${HUD_NAMES[mode]}. Pressione V para alternar.`);
+  }
+  function cycleHud() {
+    setHud(HUD_MODES[(HUD_MODES.indexOf(hudMode) + 1) % HUD_MODES.length]);
+  }
+  $("#hud").addEventListener("click", () => {
+    cycleHud();
+    canvas.focus({ preventScroll: true });
+  });
+  setHud("full", false);
   var sound = new ForkliftSound(refreshAudio);
   var soundActiveWindow = true;
   function refreshAudio() {
@@ -25673,7 +25779,13 @@ void main() {
     $("#speed-bar").style.width = Math.min(100, Math.abs(s.v) / SETTINGS.maxForward * 100) + "%";
     $("#gear").textContent = s.v > 0.02 ? "D" : s.v < -0.02 ? "R" : "N";
     $("#height").textContent = s.fork.toFixed(2).replace(".", ",");
+    const shiftCm = Math.round((s.shift || 0) * 100);
+    $("#shift-value").textContent = shiftCm === 0 ? "Centro" : `${Math.abs(shiftCm)} cm ${shiftCm > 0 ? "esq." : "dir."}`;
+    $("#shift-value").style.color = shiftCm === 0 ? "" : "#fca56f";
     $("#load").textContent = loaded ? "Pallet preso" : "Sem carga";
+    $("#mini-speed").textContent = (Math.abs(s.v) * 3.6).toFixed(1).replace(".", ",");
+    $("#mini-height").textContent = s.fork.toFixed(2).replace(".", ",");
+    $("#mini-load").textContent = loaded ? "carga presa" : "sem carga";
     $("#load").style.color = loaded ? "#fca56f" : "";
     $("#limit").textContent = (sim.maxSpeed * 3.6 || 8).toFixed(0);
     let alignment2 = "Aproximar", title = "Aproxime-se do pallet", detail = "Mantenha os garfos baixos e entre pelos vãos.";
@@ -25700,20 +25812,20 @@ void main() {
     } else if (ready) {
       alignment2 = "Alinhado";
       title = "PALLET ALINHADO — SUBIR OU PEGAR";
-      detail = "Segure ESPAÇO ou SUBIR para elevar o material.";
+      detail = "Segure ESPAÇO ou SUBIR: os garfos prendem a carga e já iniciam a subida.";
     } else if (n && n.d < 1.25) {
-      if (n.relativeHeight > 0.064) {
+      if (n.relativeHeight > PICKUP.maxHeight) {
         alignment2 = "Baixar garfos";
-        detail = "Desça os garfos até os vãos do pallet.";
-      } else if (n.relativeHeight < 0.042) {
+        detail = "Desça os garfos até a altura dos vãos do pallet.";
+      } else if (n.relativeHeight < PICKUP.minHeight) {
         alignment2 = "Subir garfos";
         detail = `Suba até ${(n.p.y + 0.05).toFixed(2).replace(".", ",")} m para entrar nos vãos.`;
-      } else if (Math.abs(s.v) > 0.16 && n.d < 0.3) {
-        alignment2 = "Parar";
-        detail = "Pare para fixar o pallet.";
-      } else if (Math.abs(n.local.x) > 0.065 || n.angle > 0.075) {
+      } else if (Math.abs(s.v) > PICKUP.speed && n.d < 0.35) {
+        alignment2 = "Reduzir";
+        detail = "Reduza a velocidade para fixar o pallet.";
+      } else if (Math.abs(n.lateral) > PICKUP.lateral || n.angle > PICKUP.angle) {
         alignment2 = "Ajustar direção";
-        detail = "Centralize os dois garfos nos vãos do pallet.";
+        detail = "Centralize os garfos nos vãos: use A / D para deslocar lateralmente.";
       } else {
         alignment2 = "Avançar devagar";
         detail = "Entre um pouco mais com os garfos.";
@@ -25729,7 +25841,7 @@ void main() {
     $("#pickup").setAttribute("aria-label", loaded ? "Soltar pallet" : "Pegar pallet");
     $("#pickup").disabled = sim.withdrawalPending();
     $("#pickup-label").textContent = sim.withdrawalPending() ? "GARFOS LIVRES" : loaded ? support?.slot ? "GUARDAR / SOLTAR" : "SOLTAR" : "PEGAR";
-    $("#hydraulic-status").textContent = sim.withdrawalPending() ? "Garfos livres — recue primeiro" : sim.forkBlocked ? "Obstáculo — ajuste a posição" : s.fork >= SETTINGS.maxFork - 1e-3 ? "Altura máxima — 3,23 m" : `${s.fork.toFixed(2).replace(".", ",")} / 3,23 m`;
+    $("#hydraulic-status").textContent = sim.withdrawalPending() ? "Garfos livres — recue primeiro" : sim.shiftBlocked ? "Deslocador travado — obstáculo" : sim.forkBlocked ? "Obstáculo — ajuste a posição" : s.fork >= SETTINGS.maxFork - 1e-3 ? "Altura máxima — 3,23 m" : `${s.fork.toFixed(2).replace(".", ",")} / 3,23 m`;
     for (let { slot, marker, material } of world.slotMarkers) {
       marker.visible = !sim.slotOccupied(slot);
       const compatible = !loaded || fitsSlot(s.loaded, slot);
@@ -25751,6 +25863,7 @@ void main() {
     truck.root.position.set(s.x, 0, s.z);
     truck.root.rotation.y = s.yaw;
     truck.carriage.position.y = s.fork - 0.09;
+    truck.shifter.position.x = s.shift || 0;
     let extension = Math.max(0, s.fork - 1.42);
     truck.inner.position.y = extension;
     truck.piston.scale.y = 1 + extension;
