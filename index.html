@@ -39,7 +39,10 @@ body[data-hud="compact"] #dashboard-left,body[data-hud="compact"] #sidebar{gap:7
 #sidebar .camera-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;padding:3px}
 #sidebar .camera-buttons button{padding:5px 2px;min-height:32px;font-size:11px}
 #sidebar #camera-hint{flex:0 0 auto;font-size:10px;line-height:1.35}
-#pallet-condition[data-damaged="true"]{color:#ffba87}
+#pallet-condition[data-damaged="true"],#rack-condition[data-damaged="true"]{color:#ffba87}
+#pallet-condition,#rack-condition{border:0;background:transparent;text-align:left;padding:0;color:var(--muted);font-size:11px;line-height:1.35;min-height:16px}
+#pallet-condition{cursor:pointer}#rack-condition:disabled{opacity:1}
+#rack-condition:not(:disabled){text-decoration:underline;text-underline-offset:3px}
 @media(max-width:620px){#sidebar .camera-buttons button{display:flex;flex-direction:column;align-items:center;gap:4px}#sidebar .camera-buttons kbd{margin:0}}
 
 
@@ -81,19 +84,19 @@ body[data-hud="compact"] #dashboard-left,body[data-hud="compact"] #sidebar{gap:7
 </section>
  </aside>
  <section id="viewport" aria-label="Visualização e direção">
-  <div id="scene-box"><canvas id="scene" aria-label="Simulador 3D de empilhadeira. Use as setas para dirigir, Espaço e F para elevar ou baixar, A S D para deslocar os garfos e C para trocar a câmera." tabindex="0"></canvas><div id="toast" role="status" aria-live="polite"></div><section id="damage-inspection" hidden aria-label="Inspeção do pallet danificado"><div><strong id="damage-view-title">PALLET DANIFICADO</strong><span id="damage-view-detail">Arraste para examinar a estrutura.</span><small>Operação e cronômetro pausados durante a inspeção.</small></div><button id="damage-view-close">Voltar ao jogo <kbd>Esc</kbd></button></section><div id="mini-hud" aria-hidden="true"><span><b id="mini-speed">0,0</b> km/h</span><span>garfos <b id="mini-height">0,05</b> m</span><span id="mini-load">sem carga</span></div></div>
+  <div id="scene-box"><canvas id="scene" aria-label="Simulador 3D de empilhadeira. Use as setas para dirigir, Espaço e F para elevar ou baixar, A S D para deslocar os garfos e C para trocar a câmera." tabindex="0"></canvas><div id="toast" role="status" aria-live="polite"></div><section id="damage-inspection" hidden aria-label="Inspeção de estrutura danificada"><div><strong id="damage-view-title">PALLET DANIFICADO</strong><span id="damage-view-detail">Arraste para examinar a estrutura.</span><small>Operação e cronômetro pausados durante a inspeção.</small></div><button id="damage-view-close">Voltar ao jogo <kbd>Esc</kbd></button></section><div id="mini-hud" aria-hidden="true"><span><b id="mini-speed">0,0</b> km/h</span><span>garfos <b id="mini-height">0,05</b> m</span><span id="mini-load">sem carga</span></div></div>
   <section class="driving-controls" aria-label="Direção e tração"><div class="touch-steer"><span>DIREÇÃO</span><div><button data-hold="left" aria-label="Virar para a esquerda"><kbd>←</kbd><small>ESQUERDA</small></button><button data-hold="right" aria-label="Virar para a direita"><kbd>→</kbd><small>DIREITA</small></button></div></div><div class="touch-drive"><span>TRAÇÃO</span><button data-hold="forward" aria-label="Andar para frente"><kbd>↑</kbd> <small>FRENTE</small></button><button data-hold="reverse" aria-label="Andar de ré"><kbd>↓</kbd> <small>RÉ</small></button></div></section>
  </section>
  <aside id="sidebar" aria-label="Câmera, garfos, carga e operação">
-  <section class="camera-toolbar" aria-label="Selecionar câmera"><span class="toolbar-label">CÂMERA</span><div class="camera-buttons"><button data-camera="cab">Cockpit <kbd>C</kbd></button><button data-camera="follow" class="active">Externa <kbd>C</kbd></button><button data-camera="orbit">Orbital <kbd>O</kbd></button><button data-camera="damage" title="Ver pallet danificado ou exemplo de dano" aria-label="Ver pallet danificado">Dano <kbd>P</kbd></button></div><span id="camera-hint">A câmera acompanha o equipamento</span></section>
+  <section class="camera-toolbar" aria-label="Selecionar câmera"><span class="toolbar-label">CÂMERA</span><div class="camera-buttons"><button data-camera="cab">Cockpit <kbd>C</kbd></button><button data-camera="follow" class="active">Externa <kbd>C</kbd></button><button data-camera="orbit">Orbital <kbd>O</kbd></button><button data-camera="damage" title="Ver último pallet ou porta-pallet danificado" aria-label="Inspecionar danos">Dano <kbd>P</kbd></button></div><span id="camera-hint">A câmera acompanha o equipamento</span></section>
   <section class="touch-hydraulic" aria-label="Comandos hidráulicos"><div class="hydraulic-axis elevation-axis"><span class="hyd-title">ELEVAÇÃO DOS GARFOS</span><div class="lift-row"><button data-hold="lift" aria-label="Subir os garfos: segure Espaço, R ou Page Up"><span class="hyd-ico">↑</span><small>SUBIR</small><kbd>ESPAÇO</kbd></button><button data-hold="lower" aria-label="Descer os garfos: segure F ou Page Down"><span class="hyd-ico">↓</span><small>DESCER</small><kbd>F</kbd></button></div><span id="hydraulic-status">0,05 / 3,23 m</span></div><div class="hydraulic-axis lateral-axis"><span class="hyd-title divider">DESLOCADOR LATERAL</span><div class="shift-row" aria-label="Deslocador lateral"><button data-hold="shiftLeft" aria-label="Deslocar os garfos para a esquerda: segure A ou Q"><span class="hyd-ico">◄</span><small>ESQ.</small><kbd>A</kbd></button><button data-hold="shiftCenter" aria-label="Centralizar os garfos: segure S"><span class="hyd-ico">◎</span><small>CENTRO</small><kbd>S</kbd></button><button data-hold="shiftRight" aria-label="Deslocar os garfos para a direita: segure D ou E"><span class="hyd-ico">►</span><small>DIR.</small><kbd>D</kbd></button></div><span id="shift-status">Centralizado</span></div><span class="hydraulic-instruction">Segure a tecla ou o botão para mover.<br>Solte para parar.</span></section>
-  <div class="warehouse-info" aria-label="Carga e armazenagem"><div class="panel-heading">CARGA E ARMAZENAGEM</div><strong id="product-name">Escolha uma carga</strong><span id="product-size">Caixas · tambores · sacarias · bobinas</span><span id="pallet-condition">Estrutura: selecione um pallet</span><span id="rack-vacancies">51 / 54 vagas livres</span></div>
+  <div class="warehouse-info" aria-label="Carga e armazenagem"><div class="panel-heading">CARGA E ARMAZENAGEM</div><strong id="product-name">Escolha uma carga</strong><span id="product-size">Caixas · tambores · sacarias · bobinas</span><button id="pallet-condition" title="Ver dano no pallet">Estrutura: selecione um pallet</button><button id="rack-condition" disabled title="Ver porta-pallet danificado">Porta-pallets íntegros</button><span id="rack-vacancies">51 / 54 vagas livres</span></div>
   <div class="operation-prompt"><span id="prompt-dot"></span><div><strong id="prompt-title">Aproxime-se do pallet</strong><span id="prompt-detail">Mantenha os garfos baixos e entre pelos vãos.</span></div><button id="pickup" class="pickup"><span id="pickup-label">PEGAR</span> <kbd>ENTER</kbd></button></div>
  </aside>
 </div>
-<footer><div><span class="keys">↑ ↓</span> Tração <span class="keys">← →</span> Direção <span class="keys">ESPAÇO / F</span> Garfos <span class="keys">A / S / D</span> Esquerda / centro / direita <span class="keys">H</span> Buzina <span class="keys">V</span> Densidade <span class="keys">N</span> Noturno</div><span class="footer-note">Reconstrução por referência · Uso demonstrativo</span><button id="reset">Reiniciar posição ↺</button></footer>
+<footer><div><span class="keys">↑ ↓</span> Tração <span class="keys">← →</span> Direção <span class="keys">ESPAÇO / F</span> Garfos <span class="keys">A / S / D</span> Esquerda / centro / direita <span class="keys">H</span> Buzina <span class="keys">V</span> Densidade <span class="keys">N</span> Noturno</div><span id="damage-save-status" class="footer-note" role="status">Danos permanentes</span><button id="reset">Reiniciar posição ↺</button></footer>
 <div id="loading"><span class="loader"></span><strong>Preparando o equipamento</strong><span>Carroceria, cockpit e galpão</span></div>
-<dialog id="instructions"><button id="close-help" class="close" aria-label="Fechar">×</button><span class="eyebrow">STILL RX 20-16</span><h1>Assuma os comandos.</h1><p>Entre nos vãos do pallet e mantenha ESPAÇO, SUBIR ou R pressionado: assim que os garfos estão dentro do pallet, a carga se prende e a subida começa na mesma hora, sem precisar acertar a altura exata. Você também pode usar PEGAR.</p><p><strong>Deslocador lateral:</strong> os garfos correm 11 cm para cada lado. Segure A (ou Q) para a esquerda, D (ou E) para a direita e S para voltar ao centro; no celular use a linha ESQ. · CENTRO · DIR. O painel mostra o deslocamento em centímetros. Use-o para acertar o pallet sem manobrar a máquina e para centralizar a carga na vaga da prateleira.</p><div class="help-grid"><span>Frente / ré</span><b>↑ / ↓</b><span>Esterçamento traseiro</span><b>← / →</b><span>Subir enquanto segura</span><b>Espaço · R · Page Up</b><span>Descer garfos</span><b>F · Page Down</b><span>Deslocar garfos · esq. / dir.</span><b>A / D · Q / E</b><span>Centralizar deslocador</span><b>S</b><span>Pegar / soltar pallet</span><b>Enter</b><span>Cockpit / externa</span><b>C</b><span>Orbital · arrastar e zoom</span><b>I ou O · mouse / toque</b><span>Ver pallet danificado</span><b>P · câmera Dano</b><span>Sair da inspeção</span><b>Esc</b><span>Buzina enquanto segura</span><b>H · botão BUZINA</b><span>Faróis</span><b>L</b><span>Turno noturno</span><b>N</b><span>Painéis: normal · compacto</span><b>V</b><span>Velocidades 3 / 6 / 8 km/h</span><b>1 / 2 / 3</b></div><p><strong>Para guardar material:</strong> escolha qualquer vaga livre dos porta-pallets A01–A04, B01–B04 ou C01, com marcas verdes. Há 54 posições, das quais 51 começam livres. Suba os garfos um pouco acima de 0,40 m, 1,86 m ou 2,96 m. Avance com a carga sobre a vaga, desça até apoiar e pressione GUARDAR / SOLTAR. Ao soltar, os garfos baixam um pouco e ficam livres. Recue em linha reta até sair do pallet; depois baixe os garfos e procure outra carga. A carga permanece na prateleira e pode ser retirada depois.</p><p><strong>Som:</strong> o áudio começa ao tocar na tela ou usar o teclado. O motor acompanha a velocidade, a hidráulica soa ao mover os garfos e o alarme toca em ré. Segure H ou BUZINA para buzinar. O botão ♪ liga ou desliga os sons.</p><p><strong>Exercício com cronômetro:</strong> escolha de 1 a 30 minutos e pressione INICIAR. A empilhadeira e os pallets voltam à posição inicial. Guarde um pallet com carga em qualquer vaga livre e compatível com o tamanho da carga, apoie na prateleira e pressione GUARDAR / SOLTAR para concluir. Soltar no piso ou guardar um pallet vazio não conclui o exercício. Há 12 cargas no piso (a maioria nas áreas demarcadas atrás da posição inicial) e 3 nas prateleiras: caixas, tambores, sacarias, caixotes, bobinas e big bags, com bases e alturas diferentes. Cargas altas precisam de um nível com espaço suficiente acima. O painel mostra o tempo restante e o decorrido, com aviso ao vencer o prazo. A contagem continua ao abrir a ajuda ou trocar de aba. RECOMEÇAR inicia uma nova tentativa; CANCELAR volta à operação livre.</p><p><strong>Painéis completos:</strong> instrumentos e cronômetro ficam à esquerda; câmera, elevação, deslocador, carga e orientações ficam à direita. A cena 3D tem uma área própria. As teclas A, S e D aparecem nos botões do deslocador, que acendem ao serem acionados. A tecla V muda apenas a densidade dos painéis, mantendo as informações.</p><p><strong>Turno noturno:</strong> a tecla N (ou o botão de lua, no topo) apaga a luz do dia, acende as luminárias do galpão e liga os faróis da empilhadeira. A visibilidade cai fora dos halos de luz, como em operação noturna real. Pressione N de novo para voltar ao dia.</p><p><strong>Visibilidade:</strong> em telas menores, a imagem fica acima dos painéis, que são organizados em duas colunas. Todas as informações permanecem disponíveis; em celulares estreitos, role a página para consultar o painel completo.</p><p><strong>Batidas nos pallets:</strong> a estrutura de madeira deforma no lado atingido, conforme a força da colisão. O dano permanece ao pegar e soltar a carga; Reiniciar posição restaura os pallets. Encostar com a máquina parada não aumenta o dano. Após a batida, o pallet aparece ampliado, sem a carga ocultar a madeira. Arraste para girar e use Voltar ao jogo ou Esc para continuar. Na lateral, a câmera Dano (P) permite rever o pallet ou visualizar um exemplo antes da primeira batida. A operação e o cronômetro ficam pausados durante essa inspeção.</p><p>No cockpit, arraste para olhar o painel e os pedais. Na orbital, arraste para girar; use a roda ou dois dedos para aproximar.</p><p>Os comandos de direção e tração ficam abaixo da imagem. Os comandos dos garfos ficam no painel identificado. É possível usar os comandos ao mesmo tempo.</p><div class="reference-note">Geometria própria baseada na RX 20-16, geração com cabine tubular. Não é um modelo CAD oficial nem um treinamento certificado. Três níveis de velocidade: 3, 6 e 8 km/h. Com garfos elevados, limite de 3 km/h; com carga baixa, até 6 km/h; em ré, até 5 km/h. Curvas podem reduzir o limite atual.<br><a href="https://www.trucksdirectuk.co.uk/wp-content/uploads/2025/03/RX20-Series-Data-Spec-sheets.pdf" target="_blank" rel="noreferrer">Ficha técnica STILL ↗</a></div><button id="start" class="primary">Voltar à operação</button></dialog>
+<dialog id="instructions"><button id="close-help" class="close" aria-label="Fechar">×</button><span class="eyebrow">STILL RX 20-16</span><h1>Assuma os comandos.</h1><p>Entre nos vãos do pallet e mantenha ESPAÇO, SUBIR ou R pressionado: assim que os garfos estão dentro do pallet, a carga se prende e a subida começa na mesma hora, sem precisar acertar a altura exata. Você também pode usar PEGAR.</p><p><strong>Deslocador lateral:</strong> os garfos correm 11 cm para cada lado. Segure A (ou Q) para a esquerda, D (ou E) para a direita e S para voltar ao centro; no celular use a linha ESQ. · CENTRO · DIR. O painel mostra o deslocamento em centímetros. Use-o para acertar o pallet sem manobrar a máquina e para centralizar a carga na vaga da prateleira.</p><div class="help-grid"><span>Frente / ré</span><b>↑ / ↓</b><span>Esterçamento traseiro</span><b>← / →</b><span>Subir enquanto segura</span><b>Espaço · R · Page Up</b><span>Descer garfos</span><b>F · Page Down</b><span>Deslocar garfos · esq. / dir.</span><b>A / D · Q / E</b><span>Centralizar deslocador</span><b>S</b><span>Pegar / soltar pallet</span><b>Enter</b><span>Cockpit / externa</span><b>C</b><span>Orbital · arrastar e zoom</span><b>I ou O · mouse / toque</b><span>Ver pallet danificado</span><b>P · câmera Dano</b><span>Sair da inspeção</span><b>Esc</b><span>Buzina enquanto segura</span><b>H · botão BUZINA</b><span>Faróis</span><b>L</b><span>Turno noturno</span><b>N</b><span>Painéis: normal · compacto</span><b>V</b><span>Velocidades 3 / 6 / 8 km/h</span><b>1 / 2 / 3</b></div><p><strong>Para guardar material:</strong> escolha qualquer vaga livre dos porta-pallets A01–A04, B01–B04 ou C01, com marcas verdes. Há 54 posições, das quais 51 começam livres. Suba os garfos um pouco acima de 0,40 m, 1,86 m ou 2,96 m. Avance com a carga sobre a vaga, desça até apoiar e pressione GUARDAR / SOLTAR. Ao soltar, os garfos baixam um pouco e ficam livres. Recue em linha reta até sair do pallet; depois baixe os garfos e procure outra carga. A carga permanece na prateleira e pode ser retirada depois.</p><p><strong>Som:</strong> o áudio começa ao tocar na tela ou usar o teclado. O motor acompanha a velocidade, a hidráulica soa ao mover os garfos e o alarme toca em ré. Segure H ou BUZINA para buzinar. O botão ♪ liga ou desliga os sons.</p><p><strong>Exercício com cronômetro:</strong> escolha de 1 a 30 minutos e pressione INICIAR. A empilhadeira e os pallets voltam à posição inicial. Guarde um pallet com carga em qualquer vaga livre e compatível com o tamanho da carga, apoie na prateleira e pressione GUARDAR / SOLTAR para concluir. Soltar no piso ou guardar um pallet vazio não conclui o exercício. Há 12 cargas no piso (a maioria nas áreas demarcadas atrás da posição inicial) e 3 nas prateleiras: caixas, tambores, sacarias, caixotes, bobinas e big bags, com bases e alturas diferentes. Cargas altas precisam de um nível com espaço suficiente acima. O painel mostra o tempo restante e o decorrido, com aviso ao vencer o prazo. A contagem continua ao abrir a ajuda ou trocar de aba. RECOMEÇAR inicia uma nova tentativa; CANCELAR volta à operação livre.</p><p><strong>Painéis completos:</strong> instrumentos e cronômetro ficam à esquerda; câmera, elevação, deslocador, carga e orientações ficam à direita. A cena 3D tem uma área própria. As teclas A, S e D aparecem nos botões do deslocador, que acendem ao serem acionados. A tecla V muda apenas a densidade dos painéis, mantendo as informações.</p><p><strong>Turno noturno:</strong> a tecla N (ou o botão de lua, no topo) apaga a luz do dia, acende as luminárias do galpão e liga os faróis da empilhadeira. A visibilidade cai fora dos halos de luz, como em operação noturna real. Pressione N de novo para voltar ao dia.</p><p><strong>Visibilidade:</strong> em telas menores, a imagem fica acima dos painéis, que são organizados em duas colunas. Todas as informações permanecem disponíveis; em celulares estreitos, role a página para consultar o painel completo.</p><p><strong>Batidas nos pallets:</strong> a estrutura de madeira deforma no lado atingido, conforme a força da colisão. O dano permanece ao pegar e soltar a carga e ao usar Reiniciar posição ou Recomeçar. Os porta-pallets também entortam no ponto atingido. Os danos são salvos automaticamente neste navegador e reaparecem ao reabrir o mesmo HTML; limpar os dados do navegador remove esse registro. Encostar com a máquina parada não aumenta o dano. Após a batida, o pallet aparece ampliado, sem a carga ocultar a madeira. Arraste para girar e use Voltar ao jogo ou Esc para continuar. Na lateral, a câmera Dano (P) mostra a última estrutura atingida. Toque no estado do pallet ou no botão dos porta-pallets danificados para inspecionar cada tipo. Antes da primeira batida, a inspeção do pallet mostra um exemplo. A operação e o cronômetro ficam pausados durante essa inspeção.</p><p>No cockpit, arraste para olhar o painel e os pedais. Na orbital, arraste para girar; use a roda ou dois dedos para aproximar.</p><p>Os comandos de direção e tração ficam abaixo da imagem. Os comandos dos garfos ficam no painel identificado. É possível usar os comandos ao mesmo tempo.</p><div class="reference-note">Geometria própria baseada na RX 20-16, geração com cabine tubular. Não é um modelo CAD oficial nem um treinamento certificado. Três níveis de velocidade: 3, 6 e 8 km/h. Com garfos elevados, limite de 3 km/h; com carga baixa, até 6 km/h; em ré, até 5 km/h. Curvas podem reduzir o limite atual.<br><a href="https://www.trucksdirectuk.co.uk/wp-content/uploads/2025/03/RX20-Series-Data-Spec-sheets.pdf" target="_blank" rel="noreferrer">Ficha técnica STILL ↗</a></div><button id="start" class="primary">Voltar à operação</button></dialog>
 </main>
 <!-- Versão portátil: estilos, simulador e Three.js incluídos neste HTML. -->
 <script>
@@ -24896,6 +24899,105 @@ void main() {
     const size = cargoSize(p), y = p.y || 0;
     return obb(p.x, p.z, size.width / 2, size.depth / 2, p.yaw, y, y + size.height);
   }
+  // Structural damage is part of the warehouse, independent of exercise resets.
+  var DAMAGE_STORAGE_KEY='still-rx20-16-warehouse-damage-v1';
+  function cleanStructuralDamage(value, rack=false) {
+    if(!value||!Array.isArray(value.impacts)||value.impacts.length>12)return null;
+    const budget=rack?3.5:1.8,impacts=[];let level=0;
+    for(const hit of value.impacts){
+      if(!hit||!['nx','nz','x','z','strength',...(rack?['y']:[])].every(k=>Number.isFinite(hit[k])))return null;
+      if(!((Math.abs(hit.nx)===1&&hit.nz===0)||(Math.abs(hit.nz)===1&&hit.nx===0))||hit.strength<=0)return null;
+      const strength=Math.min(hit.strength,budget-level);if(strength<=0)break;
+      const item={nx:hit.nx,nz:hit.nz,x:clamp2(hit.x,rack?-1.5:-.6,rack?1.5:.6),z:clamp2(hit.z,rack?-.75:-.4,rack?.75:.4),strength};
+      if(rack)item.y=clamp2(hit.y,.04,4.78);
+      impacts.push(item);level+=strength;
+    }
+    return level?{revision:Number.isSafeInteger(value.revision)&&value.revision>0?value.revision:impacts.length,level,impacts}:null;
+  }
+  function restoreDamageState(warehouse, storage) {
+    try{
+      storage=storage||globalThis.localStorage;
+      const raw=storage.getItem(DAMAGE_STORAGE_KEY);if(!raw)return 'ready';
+      if(raw.length>200000)return 'invalid';
+      const saved=JSON.parse(raw);
+      if(saved?.schema!==1||!Array.isArray(saved.pallets)||!Array.isArray(saved.racks))return 'invalid';
+      for(const [items,records,isRack] of [[warehouse.pallets,saved.pallets,false],[warehouse.racks,saved.racks,true]]){
+        for(const item of items){
+          const record=records.find(r=>r?.id===item.id),damage=cleanStructuralDamage(record?.damage,isRack);
+          if(damage)item.damage=damage;
+        }
+      }
+      return 'saved';
+    }catch{return 'unavailable';}
+  }
+  function saveDamageState(warehouse, storage) {
+    try{
+      storage=storage||globalThis.localStorage;
+      const records=items=>items.filter(i=>i.damage?.level>0).map(i=>({id:i.id,damage:i.damage}));
+      storage.setItem(DAMAGE_STORAGE_KEY,JSON.stringify({schema:1,pallets:records(warehouse.pallets),racks:records(warehouse.racks)}));
+      return 'saved';
+    }catch{return 'unavailable';}
+  }
+  function recordRackImpact(contact, speed) {
+    const rack=contact?.rack,o=contact?.rackObstacle,b=contact?.rackCollider;
+    if(!rack||!o||!b||Math.abs(speed)<.16)return null;
+    const old=rack.damage||{revision:0,level:0,impacts:[]};if(old.level>=3.5)return null;
+    // The contact lies on the struck member, not at the center of the whole bay.
+    const x=clamp2(b.x,o.x-o.hx,o.x+o.hx),z=clamp2(b.z,o.z-o.hz,o.z+o.hz);
+    const dx=b.x-x,dz=b.z-z;let nx=0,nz=0;
+    if(Math.abs(dx)>Math.abs(dz))nx=Math.sign(dx)||1;else nz=Math.sign(dz)||1;
+    const low=Math.max(o.minY,b.minY),high=Math.min(o.maxY,b.maxY);
+    const strength=Math.min(clamp2((Math.abs(speed)-.1)*.62,.14,.95),3.5-old.level);
+    const hit={x:x-rack.x,z:z-rack.z,y:clamp2((low+high)/2,.04,4.78),nx,nz,strength};
+    const impacts=old.impacts.map(i=>({...i}));
+    const same=impacts.find(i=>i.nx===nx&&i.nz===nz&&Math.hypot(i.x-hit.x,i.y-hit.y,i.z-hit.z)<.35);
+    if(same)same.strength+=strength;else impacts.push(hit);
+    if(impacts.length>12){const first=impacts.shift();impacts[0].strength+=first.strength;}
+    rack.damage={revision:old.revision+1,level:old.level+strength,impacts};
+    return rack.id;
+  }
+  function subdivideRackStructure(model) {
+    model.traverse(o=>{
+      if(!o.isMesh||o.geometry.type!=='BoxGeometry')return;
+      const p=o.geometry.parameters;
+      // Intermediate vertices let uprights buckle and long beams bend locally.
+      o.geometry=new BoxGeometry(p.width,p.height,p.depth,Math.max(1,Math.ceil(p.width/.16)),Math.max(1,Math.ceil(p.height/.16)),Math.max(1,Math.ceil(p.depth/.16)));
+    });
+  }
+  function prepareRackDamage(rack) {
+    const parts=[];
+    rack.model.traverse(o=>{
+      if(!o.isMesh)return;
+      o.geometry=o.geometry.clone();
+      parts.push({mesh:o,original:new Float32Array(o.geometry.attributes.position.array)});
+    });
+    rack.model.userData.damageRig={parts,revision:-1};
+  }
+  function updateRackDamage(rack) {
+    const rig=rack.model.userData.damageRig;if(!rig)return;
+    const revision=rack.damage?.revision||0;if(rig.revision===revision)return;
+    const impacts=rack.damage?.impacts||[];
+    for(const {mesh,original} of rig.parts){
+      const g=mesh.geometry,a=g.attributes.position;
+      if(!impacts.length)a.array.set(original);
+      else for(let i=0;i<a.count;i++){
+        const x=original[i*3]-rack.x,y=original[i*3+1],z=original[i*3+2]-rack.z;
+        let dx=0,dy=0,dz=0;
+        for(const hit of impacts){
+          const near=Math.exp(-Math.pow((x-hit.x)/.72,2)-Math.pow((z-hit.z)/.64,2));
+          const kink=Math.max(0,1-Math.abs(y-hit.y)/.78);
+          const fixedFoot=clamp2(y/.15,0,1),influence=near*hit.strength*fixedFoot;
+          const bend=influence*(.34*kink+.06*clamp2(y-hit.y,0,2.8));
+          dx-=hit.nx*bend;dz-=hit.nz*bend;
+          dy-=influence*.07*kink;
+        }
+        a.setXYZ(i,x+rack.x+clamp2(dx,-.5,.5),Math.max(0,y+clamp2(dy,-.16,0)),z+rack.z+clamp2(dz,-.5,.5));
+      }
+      a.needsUpdate=true;g.computeVertexNormals();g.computeBoundingBox();g.computeBoundingSphere();
+    }
+    rig.revision=revision;
+  }
+
   function recordPalletImpact(contact, speed) {
     const p=contact?.pallet, collider=contact?.collider;
     // A stopped truck pressing against a pallet must not accumulate new damage.
@@ -24981,7 +25083,7 @@ void main() {
     reset() {
       this.state = { x: -1.2, z: -3.9, yaw: 0, v: 0, steer: 0, fork: 0.05, shift: 0, loaded: null };
       this.released = null;
-      for(const p of this.pallets)p.damage=null;
+      // Repositioning the truck never repairs warehouse damage.
       this.time = 0;
       this.collisionCooldown = 0;
       this.forkBlocked = false;
@@ -25007,8 +25109,9 @@ void main() {
       const parts=hydraulicsOnly?hydraulicBoxes(s):truckBoxes(s,includeForks),size=s.loaded?cargoSize(s.loaded):null;
       const carried=size?relativeBox(s,s.shift||0,loadOffset(s.loaded),size.width/2,size.depth/2,s.fork-SETTINGS.supportOffset,s.fork-SETTINGS.supportOffset+size.height):null;
       for(const o of this.obstacles){
-        if(parts.some(b=>overlaps(b,o)))return {kind:'obstacle'};
-        if(carried&&overlaps(carried,o))return {kind:'obstacle',pallet:s.loaded,collider:o};
+        const part=parts.find(b=>overlaps(b,o));
+        if(part)return {kind:'obstacle',rack:o.rack,rackObstacle:o,rackCollider:part};
+        if(carried&&overlaps(carried,o))return {kind:'obstacle',pallet:s.loaded,collider:o,rack:o.rack,rackObstacle:o,rackCollider:carried};
       }
       const wheels=hydraulicsOnly?[]:[relativeBox(s,-.466,.605,.09,.229,0,.458),relativeBox(s,.466,.605,.09,.229,0,.458),relativeBox(s,0,-.736,.147,.191,0,.382)];
       for(const p of this.pallets){
@@ -25065,7 +25168,8 @@ void main() {
             s.z = bounce.z;
           }
           const damagedPallet=recordPalletImpact(contact,s.v);
-          event = { type: "collision", kind: hit, damagedPallet };
+          const damagedRack=recordRackImpact(contact,s.v);
+          event = { type: "collision", kind: hit, damagedPallet, damagedRack };
           this.collisionCooldown = 0.55;
         }
         s.v = 0;
@@ -25223,7 +25327,7 @@ void main() {
   function createWarehouse(scene2, mobile2) {
     const root = new Group();
     scene2.add(root);
-    const obstacles = [], slots = [], slotMarkers = [];
+    const obstacles = [], slots = [], slotMarkers = [], racks = [];
     const floorMat = createFloorMaterial();
     const floor = new Mesh(new PlaneGeometry(24, 32), floorMat);
     floor.rotation.x = -Math.PI / 2;
@@ -25293,25 +25397,28 @@ void main() {
     root.add(rackGroup);
     function rack(x, z, bay) {
       const { width, depth, levels } = RACK;
+      const rackModel=new Group();rackModel.name='porta_pallet_'+bay;rackGroup.add(rackModel);
+      const record={id:bay,bay,x,z,yaw:0,damage:null,model:rackModel};racks.push(record);
       const layout = rackLayout(x, z, bay, true);
+      for(const obstacle of layout.obstacles)obstacle.rack=record;
       obstacles.push(...layout.obstacles);
       slots.push(...layout.slots);
       for (let dx of [-width * 0.5, width * 0.5]) for (let dz of [-depth * 0.5, depth * 0.5]) {
-        box(rackGroup, 0.077, 4.78, 0.077, x + dx, 2.39, z + dz, materials.rack);
-        box(rackGroup, 0.16, 0.032, 0.16, x + dx, 0.017, z + dz, materials.steel);
-        for (let yy = 0.5; yy < 4.6; yy += 0.3) box(rackGroup, 0.025, 0.014, 2e-3, x + dx, yy, z + dz - 0.04, materials.dark);
+        box(rackModel, 0.077, 4.78, 0.077, x + dx, 2.39, z + dz, materials.rack);
+        box(rackModel, 0.16, 0.032, 0.16, x + dx, 0.017, z + dz, materials.steel);
+        for (let yy = 0.5; yy < 4.6; yy += 0.3) box(rackModel, 0.025, 0.014, 2e-3, x + dx, yy, z + dz - 0.04, materials.dark);
       }
       for (let y of levels) {
-        for (let dz of [-depth * 0.5, depth * 0.5]) box(rackGroup, width, 0.13, 0.072, x, y - 0.085, z + dz, materials.beam);
-        box(rackGroup, width - 0.04, 0.028, depth - 0.08, x, y - 0.014, z, materials.steel);
+        for (let dz of [-depth * 0.5, depth * 0.5]) box(rackModel, width, 0.13, 0.072, x, y - 0.085, z + dz, materials.beam);
+        box(rackModel, width - 0.04, 0.028, depth - 0.08, x, y - 0.014, z, materials.steel);
       }
-      for (let dz of [-depth * 0.5, depth * 0.5]) box(rackGroup, width, 0.13, 0.072, x, 4.65, z + dz, materials.beam);
+      for (let dz of [-depth * 0.5, depth * 0.5]) box(rackModel, width, 0.13, 0.072, x, 4.65, z + dz, materials.beam);
       for (let side of [-1, 1]) for (let yy = 0.4; yy < 4.1; yy += 1.25) {
-        beam(rackGroup, [x + side * width * 0.5, yy, z - depth * 0.5], [x + side * width * 0.5, yy + 1.2, z + depth * 0.5], 0.03, 0.023, materials.rack);
-        beam(rackGroup, [x + side * width * 0.5, yy + 1.2, z - depth * 0.5], [x + side * width * 0.5, yy, z + depth * 0.5], 0.03, 0.023, materials.rack);
+        beam(rackModel, [x + side * width * 0.5, yy, z - depth * 0.5], [x + side * width * 0.5, yy + 1.2, z + depth * 0.5], 0.03, 0.023, materials.rack);
+        beam(rackModel, [x + side * width * 0.5, yy + 1.2, z - depth * 0.5], [x + side * width * 0.5, yy, z + depth * 0.5], 0.03, 0.023, materials.rack);
       }
       const code = textTexture([{ text: bay, size: 46, y: 51, align: "center", x: 128 }], { bg: "#f3f0df", color: "#283942", w: 256, h: 72 });
-      label(rackGroup, code, 0.43, 0.12, x, 1.72, z - depth * 0.5 - 0.045, Math.PI);
+      label(rackModel, code, 0.43, 0.12, x, 1.72, z - depth * 0.5 - 0.045, Math.PI);
       for (let slot of layout.slots) {
         const marker = new Group();
         marker.position.set(slot.x, slot.y + 8e-3, slot.z);
@@ -25320,7 +25427,7 @@ void main() {
         for (let dx of [-0.6, 0.6]) box(marker, 0.013, 3e-3, 1, dx, 0, 0, material);
         for (let dz of [-0.5, 0.5]) box(marker, 1.21, 3e-3, 0.013, 0, 0, dz, material);
         const tag = textTexture([{ text: `N${slot.level} · ${slot.y.toFixed(2).replace(".", ",")} m`, size: 34, y: 46, align: "center", x: 128 }], { bg: "#284839", w: 256, h: 64 });
-        label(rackGroup, tag, 0.42, 0.105, slot.x, slot.y - 0.083, z - depth * 0.5 - 0.045, Math.PI);
+        label(rackModel, tag, 0.42, 0.105, slot.x, slot.y - 0.083, z - depth * 0.5 - 0.045, Math.PI);
         slotMarkers.push({ slot, marker, material });
       }
     }
@@ -25350,7 +25457,7 @@ void main() {
       for (let dz of [-depth / 2 - 0.14, depth / 2 + 0.14]) floorLine(p.x, p.z + dz, width + 0.28, 0.025);
     }
     const initialPallets = pallets.map((p) => ({ ...p }));
-    return { root, obstacles, pallets, palletMeshes, slots, slotMarkers, initialPallets, lampMaterial: lum, windowMaterial: windowmat, skylightMaterial:roofV2.skylightMat, glazing:roofV2.glazing };
+    return { root, obstacles, pallets, palletMeshes, racks, slots, slotMarkers, initialPallets, lampMaterial: lum, windowMaterial: windowmat, skylightMaterial:roofV2.skylightMat, glazing:roofV2.glazing };
   }
 
   // entrega/simulador-github-pages/sound.js
@@ -25573,6 +25680,8 @@ void main() {
   addWarehouseFinish(world, scene, truck);
   warehouseDetailsV2(world,truck);
   var sim = new Simulation(world.obstacles, world.pallets, world.slots);
+  var damageStorageStatus=restoreDamageState(world);
+  if(damageStorageStatus!=='unavailable')damageStorageStatus=saveDamageState(world);
   function batchStatic(group, exclude = /* @__PURE__ */ new Set()) {
     group.updateWorldMatrix(true, true);
     const inverse = group.matrixWorld.clone().invert(), batches = /* @__PURE__ */ new Map(), remove = [];
@@ -25610,7 +25719,8 @@ void main() {
   var moving = [truck.body, truck.steeringAxle, truck.steeringWheel, ...truck.joysticks, ...truck.pedals, truck.carriage, truck.shifter, truck.inner, truck.piston, ...truck.chainLinks, ...wheelSpins];
   batchStatic(truck.root, new Set(moving));
   for (let g of moving) if (!g.isMesh) batchStatic(g, new Set(moving));
-  batchStatic(world.root,new Set([world.glazing]));
+  batchStatic(world.root,new Set([world.glazing,...world.racks.map(r=>r.model)]));
+  for(const rack of world.racks){subdivideRackStructure(rack.model);batchStatic(rack.model);prepareRackDamage(rack);updateRackDamage(rack);}
   world.palletMeshes.forEach(m=>{const base=m.getObjectByName("pallet_structure");batchStatic(m,new Set([base]));batchStatic(base);preparePalletDamage(m);});
   world.slotMarkers.forEach(({ marker }) => batchStatic(marker));
   var operator = createSeatedOperator(truck);
@@ -25662,7 +25772,7 @@ void main() {
     updatePalletDamage(model,pallet);
     return {pallet,model};
   }
-  var damageView=null,inspectionScene=null,lastDamagedPalletId=null,damageExample=null;
+  var damageView=null,inspectionScene=null,lastDamagedPalletId=null,damageExample=null,lastDamagedRackId=null,lastDamageType=world.racks.some(r=>r.damage?.level>0)?'rack':'pallet';
   function ensureInspectionScene() {
     if(inspectionScene)return;
     inspectionScene=new Scene();inspectionScene.background=new Color('#26333a');
@@ -25695,6 +25805,7 @@ void main() {
     updatePalletDamage(model,pallet);
     const snapshot=makeDamageSnapshot(pallet,model);inspectionScene.add(snapshot);
     damageView={pallet,snapshot,previousMode,pausedAt:performance.now()};
+    lastDamageType='pallet';
     cameraMode='damage';orbit.enabled=true;orbit.minDistance=.6;orbit.maxDistance=6;
     orbit.minPolarAngle=.20;orbit.maxPolarAngle=1.48;
     const size=cargoSize(pallet),hit=pallet.damage.impacts.reduce((a,b)=>a.strength>b.strength?a:b);
@@ -25713,8 +25824,43 @@ void main() {
     canvas.focus({preventScroll:true});
   }
 
+  function openRackDamageView(rackId=lastDamagedRackId) {
+    const rack=world.racks.find(r=>r.id===rackId&&r.damage?.level>0)||world.racks.find(r=>r.damage?.level>0);
+    if(!rack){openDamageView();return;}
+    const previousMode=damageView?.previousMode||(cameraMode==='damage'?'follow':cameraMode);
+    if(damageView)closeDamageView();
+    else if(exercise.status==='running')exercise.tick(performance.now());
+    ensureInspectionScene();clearInput();sim.state.v=0;updateRackDamage(rack);
+    const snapshot=new Group();snapshot.name='porta_pallet_danificado_em_inspecao';
+    rack.model.updateWorldMatrix(true,true);
+    const inverse=rack.model.matrixWorld.clone().invert();
+    rack.model.traverse(o=>{
+      if(!o.isMesh)return;
+      const part=new Mesh(o.geometry,o.material);
+      part.applyMatrix4(new Matrix4().multiplyMatrices(inverse,o.matrixWorld));
+      part.position.x-=rack.x;part.position.z-=rack.z;
+      part.castShadow=true;part.receiveShadow=true;snapshot.add(part);
+    });
+    inspectionScene.add(snapshot);damageView={rack,snapshot,previousMode,pausedAt:performance.now()};
+    lastDamagedRackId=rack.id;lastDamageType='rack';
+    cameraMode='damage';orbit.enabled=true;orbit.minDistance=1;orbit.maxDistance=26;
+    orbit.minPolarAngle=.20;orbit.maxPolarAngle=1.48;
+    const hit=rack.damage.impacts.reduce((a,b)=>a.strength>b.strength?a:b);
+    const direction=V(hit.nx+hit.nz*.72,.24,hit.nz-hit.nx*.72).normalize();
+    const aspect=viewWidth()/viewHeight(),angle=Math.min(38*Math.PI/360,Math.atan(Math.tan(38*Math.PI/360)*aspect));
+    const distance=Math.hypot(RACK.width+.8,RACK.height,RACK.depth+.8)*.54/Math.sin(angle)*1.08;
+    orbit.target.set(0,RACK.height/2,0);camera.fov=38;camera.aspect=aspect;
+    camera.position.copy(direction.multiplyScalar(distance).add(orbit.target));
+    camera.lookAt(orbit.target);camera.updateProjectionMatrix();orbit.update();
+    document.querySelectorAll('[data-camera]').forEach(b=>{const active=b.dataset.camera==='damage';b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
+    $('#camera-hint').textContent='Porta-pallet ampliado · arraste para girar';
+    $('#damage-view-title').textContent='PORTA-PALLET '+rack.bay+' DANIFICADO';
+    $('#damage-view-detail').textContent='Estrutura torta no ponto da batida · dano permanente';
+    $('#damage-inspection').hidden=false;canvas.focus({preventScroll:true});
+  }
+
   function selectCamera(mode) {
-    if(mode==='damage'){openDamageView();return;}
+    if(mode==='damage'){if(lastDamageType==='rack')openRackDamageView();else openDamageView();return;}
     if(damageView)closeDamageView();
     cameraMode = mode;
     orbit.enabled = mode === "orbit";
@@ -25858,7 +26004,7 @@ void main() {
     }
     if (e.code === "KeyC") selectCamera(cameraMode === "cab" ? "follow" : "cab");
     if (e.code === "KeyO" || e.code === "KeyI") selectCamera("orbit");
-    if (e.code === "KeyP") {e.preventDefault();openDamageView();}
+    if (e.code === "KeyP") {e.preventDefault();selectCamera("damage");}
     if (e.code === "Escape" && damageView) {e.preventDefault();selectCamera(damageView.previousMode);}
     if (e.code === "KeyL") toggleLights();
     if (e.code === "KeyV") cycleHud();
@@ -25912,18 +26058,19 @@ void main() {
   });
   function reset(silent = false) {
     if(damageView){const previous=damageView.previousMode;closeDamageView();cameraMode=previous;}
-    lastDamagedPalletId=null;
     clearInput();
-    world.pallets.forEach((p, i) => Object.assign(p, world.initialPallets[i]));
+    world.pallets.forEach((p, i) => {const damage=p.damage;Object.assign(p, world.initialPallets[i]);p.damage=damage;});
     sim.reset();
     exercise.reset();
     syncPallets();
     cameraInitialized = false;
     selectCamera(cameraMode);
-    if (!silent) toast("Equipamento e pallets reposicionados. Cronômetro zerado.");
+    if (!silent) toast("Posição reiniciada. Os danos nos pallets e porta-pallets foram mantidos.");
     updateHud();
   }
   $("#reset").addEventListener("click", () => reset());
+  $('#rack-condition').addEventListener('click',()=>openRackDamageView());
+  $('#pallet-condition').addEventListener('click',()=>openDamageView());
   $('#damage-view-close').addEventListener('click',()=>selectCamera(damageView?.previousMode||'follow'));
   $("#timer-minutes").addEventListener("focus", clearInput);
   $("#timer-minutes").addEventListener("input", () => {
@@ -26213,15 +26360,20 @@ void main() {
       material.color.set(compatible ? target?.slot.id === slot.id ? "#fff18c" : "#82cba0" : "#9a978a");
       material.opacity = compatible ? 0.8 : 0.22;
     }
-    const product = damageView?.pallet || s.loaded || (n?.d < 1.4 ? n.p : null);
-    $("#product-name").textContent = product ? cargoName(product) : "Escolha uma carga";
+    const product = damageView?.rack ? null : damageView?.pallet || s.loaded || (n?.d < 1.4 ? n.p : null);
+    $("#product-name").textContent = damageView?.rack ? "Porta-pallet "+damageView.rack.bay : product ? cargoName(product) : "Escolha uma carga";
     const damage=product?.damage?.level||0;
     $("#pallet-condition").textContent=product?(damage?"Estrutura: deformação "+(damage<.4?"leve":damage<.9?"moderada":"acentuada"):"Estrutura: íntegra"):"Estrutura: selecione um pallet";
     $("#pallet-condition").dataset.damaged=String(damage>0);
+    const damagedRacks=world.racks.filter(r=>r.damage?.level>0);
+    $('#rack-condition').textContent=damagedRacks.length?damagedRacks.length+' porta-pallet(s) danificado(s) · Ver':'Porta-pallets íntegros';
+    $('#rack-condition').disabled=!damagedRacks.length;
+    $('#rack-condition').dataset.damaged=String(damagedRacks.length>0);
+    $('#damage-save-status').textContent=damageStorageStatus==='unavailable'?'Danos nesta sessão · navegador não permitiu salvar':'Danos permanentes · salvos neste navegador';
     if (product) {
       const size = cargoSize(product);
       $("#product-size").textContent = `${size.width.toFixed(2)} × ${size.depth.toFixed(2)} × ${size.height.toFixed(2)} m`.replaceAll(".", ",");
-    } else $("#product-size").textContent = "Caixas · tambores · sacarias · bobinas";
+    } else $("#product-size").textContent = damageView?.rack ? "2,70 × 1,18 × 4,78 m" : "Caixas · tambores · sacarias · bobinas";
     $("#rack-vacancies").textContent = `${world.slots.filter((slot) => !sim.slotOccupied(slot)).length} / ${world.slots.length} vagas livres`;
     truck.updateDisplay(s.v, s.fork, loaded);
   }
@@ -26237,6 +26389,7 @@ void main() {
     truck.piston.scale.y = 1 + extension;
     truck.piston.position.y = 1.36 + extension * 0.5;
     syncPallets();
+    for(const rack of world.racks)updateRackDamage(rack);
     truck.steeringAxle.rotation.y = -s.steer;
     truck.steeringWheel.rotation.y = s.steer * 3.5;
     for (let w of [...truck.fronts, ...truck.rear]) w.spin.rotation.x += s.v * dt / w.r;
@@ -26270,7 +26423,9 @@ void main() {
       let hit = sim.step(dt);
       if (hit) {
         const msg = hit.damagedPallet != null ? "BATIDA NO PALLET — a lateral da estrutura ficou deformada." : hit.type === "pickup" ? hit.message : hit.kind === "hydraulic" ? "Os garfos ou a carga tocaram a estrutura. Ajuste a altura antes de avançar." : hit.kind === "fork" ? "Os garfos tocaram no pallet. Ajuste a altura e o alinhamento." : "Barreira de aproximação. Pare e ajuste a manobra.";
+        if(hit.damagedPallet!=null||hit.damagedRack!=null)damageStorageStatus=saveDamageState(world);
         if(hit.damagedPallet!=null){lastDamagedPalletId=hit.damagedPallet;openDamageView(hit.damagedPallet);}
+        else if(hit.damagedRack!=null){lastDamagedRackId=hit.damagedRack;openRackDamageView(hit.damagedRack);}
         else toast(msg);
         if (hit.type === "collision" && mobile && navigator.vibrate) navigator.vibrate([35, 20, 25]);
       }
