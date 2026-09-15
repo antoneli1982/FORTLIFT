@@ -24346,8 +24346,14 @@ void main() {
     const torso = new Group(); torso.name="uniforme_e_torax"; root.add(torso); articulated.push(torso);
     const shirtCanvas=document.createElement("canvas");shirtCanvas.width=512;shirtCanvas.height=1024;
     const sx=shirtCanvas.getContext("2d");sx.fillStyle="#adb846";sx.fillRect(0,0,512,1024);sx.fillStyle="#22456a";sx.fillRect(0,665,512,359);sx.fillStyle="#a9ada8";sx.fillRect(0,555,512,110);
+    const stripeGlowCanvas=document.createElement("canvas");stripeGlowCanvas.width=512;stripeGlowCanvas.height=1024;
+    const sg=stripeGlowCanvas.getContext("2d");
+    const stripeGrad=sg.createLinearGradient(0,550,0,670);stripeGrad.addColorStop(0,'rgba(170,190,210,0.0)');stripeGrad.addColorStop(.18,'rgba(232,240,246,.88)');stripeGrad.addColorStop(.5,'rgba(250,252,255,1)');stripeGrad.addColorStop(.82,'rgba(232,240,246,.88)');stripeGrad.addColorStop(1,'rgba(170,190,210,0.0)');
+    sg.fillStyle=stripeGrad;sg.fillRect(0,548,512,118);
+    sg.fillStyle='rgba(255,255,255,.16)';for(let i=0;i<1200;i++){const x=(i*73)%512,y=556+((i*37)%100),w=1+((i*19)%3),h=1+((i*13)%2);sg.fillRect(x,y,w,h);}
     const shirtMap=new CanvasTexture(shirtCanvas);shirtMap.colorSpace=SRGBColorSpace;shirtMap.anisotropy=8;
-    const shirt=new MeshStandardMaterial({map:shirtMap,roughness:.94,bumpMap:weave,bumpScale:.0007});
+    const stripeGlowMap=new CanvasTexture(stripeGlowCanvas);stripeGlowMap.colorSpace=SRGBColorSpace;stripeGlowMap.anisotropy=8;
+    const shirt=new MeshStandardMaterial({map:shirtMap,roughness:.94,bumpMap:weave,bumpScale:.0007,emissive:'#f4f8ff',emissiveMap:stripeGlowMap,emissiveIntensity:.06,envMapIntensity:.92});
     rings(torso,[[1.115,.17,.113,-.255],[1.15,.185,.125,-.25],[1.22,.193,.132,-.248],[1.31,.19,.13,-.24],[1.40,.191,.123,-.225],[1.49,.205,.114,-.218],[1.54,.203,.096,-.215],[1.575,.151,.077,-.214],[1.595,.059,.052,-.212]],shirt,{fold:.025});
     sweep(torso,[[0,1.578,-.211],[0,1.628,-.206],[0,1.674,-.201]],[[.058,.049],[.051,.047],[.055,.05]],skin,{along:20});
     const collar=mesh(torso,new TorusGeometry(.058,.009,12,64),navy,0,1.595,-.212);collar.rotation.x=Math.PI/2;collar.scale.y=.89;
@@ -24672,7 +24678,7 @@ void main() {
       poseSegment(a.upper,shoulder,elbow);poseSegment(a.lower,elbow,wrist);
     }
     const wheelLocal=V();
-    const data={root,head,torso,leftHand,rightHand,arms,boots,articulated,face,belt,tongue,setBelt,update:null};
+    const data={root,head,torso,leftHand,rightHand,arms,boots,articulated,face,belt,tongue,reflectiveShirt:shirt,setBelt,update:null};
     data.update=function(dt,state,input,time,firstPerson){
       head.visible=!firstPerson;
       const breath=Math.sin(time*1.48)*.0018;
@@ -26939,6 +26945,11 @@ void main() {
     for(const mat of truck.lamps)mat.emissiveIntensity=on?4.8:0;
     for(const mat of truck.ledEmitters)mat.color.set(on?'#f3faff':'#64737c');
     for(const mat of ledGlows)mat.opacity=on?.44:0;
+    if(operator?.reflectiveShirt){
+      const ambientReflect=MathUtils.lerp(.05,.95,1-day);
+      const ledBoost=on?1.45:0;
+      operator.reflectiveShirt.emissiveIntensity=ambientReflect+ledBoost;
+    }
     $('#sp-lamps').textContent=on?'LED · LIGADOS':'LED · AUTOMÁTICOS';
     $('#sp-clock').dataset.dark=String(nightMode);
     $('#sp-clock').dataset.led=String(on);
